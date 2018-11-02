@@ -3,6 +3,7 @@
 
     <string name="facebook_app_id">2193237877598639</string>
     <string name="fb_login_protocol_scheme">fb2193237877598639</string>
+    <string name="terms_cond">By clicking on login, you are accepting our terms and conditions</string>
 
 
 </resources>
