@@ -7,6 +7,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.AccountActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -31,7 +32,6 @@ public class MainActivity extends AppCompatActivity
     private CallbackManager callbackManager;
     public static final String TAG = "FACEBOOK_LOGIN";
 
-    private static final String EMAIL = "email";
 
 
     @Override
@@ -46,7 +46,7 @@ public class MainActivity extends AppCompatActivity
         callbackManager = CallbackManager.Factory.create();
 
         LoginButton loginButton = findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList(EMAIL, "public_profile"));
+        loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
         // If you are using in a fragment, call loginButton.setFragment(this);
 
         // Callback registration
@@ -58,6 +58,8 @@ public class MainActivity extends AppCompatActivity
                 // gets the access token and create auth token
                 // then signs in with credentials
                 handleFacebookAccessToken(loginResult.getAccessToken());
+
+                updateUI();
             }
 
             @Override
