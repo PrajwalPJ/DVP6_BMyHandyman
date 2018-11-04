@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman;
 
 import android.content.Intent;
@@ -7,7 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.AccountActivity;
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.ProfileActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -38,7 +42,7 @@ public class MainActivity extends AppCompatActivity
     protected void onCreate(Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_main);
+        setContentView(R.layout.fragment_login);
 
         // Initialize Firebase Auth
         mAuth = FirebaseAuth.getInstance();
@@ -96,7 +100,7 @@ public class MainActivity extends AppCompatActivity
     {
         Toast.makeText(MainActivity.this, "You're logged in ", Toast.LENGTH_SHORT).show();
 
-        Intent accountIntent = new Intent(MainActivity.this, AccountActivity.class);
+        Intent accountIntent = new Intent(MainActivity.this, ProfileActivity.class);
         startActivity(accountIntent);
         finish();
     }

@@ -3,7 +3,7 @@
 
     <string name="facebook_app_id">2193237877598639</string>
     <string name="fb_login_protocol_scheme">fb2193237877598639</string>
-    <string name="terms_cond">By clicking on login, you are accepting our terms and conditions</string>
+    <string name="terms_cond">By clicking on login, you are accepting our terms and conditions.</string>
     <string name="construction">Construction</string>
     <string name="mobile_development">Mobile Development</string>
     <string name="skills">SKILLS</string>
@@ -17,6 +17,13 @@
     <string name="num_raat">4/5</string>
     <string name="prajwal_ramamurthy">PRAJWAL RAMAMURTHY</string>
     <string name="copyright">Copyright @ 2018 Prajwal Ramamurthy</string>
+    <string name="todo">TODO</string>
+    <string name="none">none</string>
+    <string name="search">Search</string>
+    <string name="map">Map</string>
+    <string name="explore">Explore</string>
+    <string name="create">Create</string>
+    <string name="profile">Profile</string>
 
 
 </resources>
