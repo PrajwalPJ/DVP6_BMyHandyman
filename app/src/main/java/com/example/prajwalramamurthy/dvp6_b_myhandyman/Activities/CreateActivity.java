@@ -9,13 +9,12 @@ import android.support.v7.app.AppCompatActivity;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
-public class ExploreActivity extends AppCompatActivity
+public class CreateActivity extends AppCompatActivity
 {
 
     @Override
-    protected void onCreate(Bundle savedInstanceState)
-    {
+    protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_explore);
+        setContentView(R.layout.fragment_create);
     }
 }

@@ -4,5 +4,9 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
-public class ProfileFragment {
+import android.support.v4.app.Fragment;
+
+public class ProfileFragment extends Fragment
+{
+
 }

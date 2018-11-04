@@ -11,6 +11,7 @@ import android.os.Bundle;
 import android.util.Log;
 import android.widget.Toast;
 
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.NavigationActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.ProfileActivity;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
@@ -100,7 +101,7 @@ public class MainActivity extends AppCompatActivity
     {
         Toast.makeText(MainActivity.this, "You're logged in ", Toast.LENGTH_SHORT).show();
 
-        Intent accountIntent = new Intent(MainActivity.this, ProfileActivity.class);
+        Intent accountIntent = new Intent(MainActivity.this, NavigationActivity.class);
         startActivity(accountIntent);
         finish();
     }
