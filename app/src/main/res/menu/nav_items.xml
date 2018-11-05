@@ -5,13 +5,16 @@
     <item
         android:id="@+id/nav_explore"
         android:icon="@drawable/ic_explore_white_24dp"
-        android:title="@string/explore" />
+        android:title="@string/explore"
+        android:orderInCategory="1"/>
     <item
         android:id="@+id/nav_create"
         android:icon="@drawable/ic_add_circle_outline_white_24dp"
-        android:title="@string/create" />
+        android:title="@string/create"
+        android:orderInCategory="2"/>
     <item
         android:id="@+id/nav_profile"
         android:icon="@drawable/ic_person_outline_white_24dp"
-        android:title="@string/profile" />
+        android:title="@string/profile"
+        android:orderInCategory="3"/>
 </menu>

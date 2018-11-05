@@ -10,6 +10,7 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v4.app.Fragment;
 import android.support.v4.app.FragmentTransaction;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
 
@@ -29,6 +30,7 @@ public class NavigationActivity extends AppCompatActivity
     private ProfileFragment profileFragment;
 
 
+
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
@@ -39,6 +41,7 @@ public class NavigationActivity extends AppCompatActivity
         myMainFrame = findViewById(R.id.main_frame_layout);
         myBottomNavBar = findViewById(R.id.main_navigation_bar);
 
+
         // initialize my fragments
         createFragment = new CreateFragment();
         exploreFragment = new ExploreFragment();
@@ -46,7 +49,9 @@ public class NavigationActivity extends AppCompatActivity
 
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ExploreFragment.newInstance()).commit();
 
-//        setFragment(exploreFragment);
+        final Menu menu = myBottomNavBar.getMenu();
+        final MenuItem menuItem = menu.getItem(0);
+        menuItem.setChecked(true);
 
         // when an option in the nav bar is clicked this is what handles the click
         myBottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
@@ -59,34 +64,18 @@ public class NavigationActivity extends AppCompatActivity
                     case R.id.nav_explore:
 
                         // change the color when selected
-                        myBottomNavBar.setItemBackgroundResource(R.color.colorAccent);
-                        // method call
-                        //setFragment(exploreFragment);
-
 
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ExploreFragment.newInstance()).commit();
-                        // ExploreFragment.newInstance();
 
-//                        Intent exploreIntent = new Intent(NavigationActivity.this, ExploreActivity.class);
-//                        startActivity(exploreIntent);
-//                        finish();
 
                         return true;
-
 
                     case R.id.nav_create:
 
                         // change the color when selected
                         myBottomNavBar.setItemBackgroundResource(R.color.colorPrimary);
-                        // method call
-                        setFragment(createFragment);
 
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, CreateFragment.newInstance()).commit();
-
-
-//                        Intent createIntent = new Intent(NavigationActivity.this, CreateActivity.class);
-//                        startActivity(createIntent);
-//                        finish();
 
                         return true;
 
@@ -94,15 +83,8 @@ public class NavigationActivity extends AppCompatActivity
                     case R.id.nav_profile:
 
                         // change the color when selected
-                        myBottomNavBar.setItemBackgroundResource(R.color.colorPrimaryDark);
-                        // method call
-                        setFragment(profileFragment);
-//
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ProfileFragment.newInstance()).commit();
 
-//                        Intent profileIntent = new Intent(NavigationActivity.this, ProfileActivity.class);
-//                        startActivity(profileIntent);
-//                        finish();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ProfileFragment.newInstance()).commit();
 
                         return true;
 
@@ -121,16 +103,5 @@ public class NavigationActivity extends AppCompatActivity
     }
 
 
-    // custom method to load our different fragments and layouts
-    private void setFragment(Fragment fragment)
-    {
 
-        // loads the fragment and layout
-        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction()
-                .replace(R.id.main_frame_layout, fragment);
-        fragTransaction.commit();
-
-//        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragment);
-//        ExploreFragment.newInstance();
-    }
 }
