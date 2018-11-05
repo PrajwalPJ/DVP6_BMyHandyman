@@ -14,7 +14,7 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/AppTheme">
-        <activity android:name=".MainActivity">
+        <activity android:name=".Activities.NavigationActivity">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
@@ -48,7 +48,7 @@
 
         <!--activities-->
         <activity android:name=".Activities.ProfileActivity" />
-        <activity android:name=".Activities.NavigationActivity"/>
+        <!--<activity android:name=".Activities.NavigationActivity"/>-->
         <activity android:name=".Activities.CreateActivity"/>
         <activity android:name=".Activities.ExploreActivity"/>
 

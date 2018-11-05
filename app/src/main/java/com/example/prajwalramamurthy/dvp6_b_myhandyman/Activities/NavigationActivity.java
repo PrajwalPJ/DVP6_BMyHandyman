@@ -16,7 +16,6 @@ import android.widget.FrameLayout;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ExploreFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ProfileFragment;
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.MainActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
 public class NavigationActivity extends AppCompatActivity
@@ -45,6 +44,10 @@ public class NavigationActivity extends AppCompatActivity
         exploreFragment = new ExploreFragment();
         profileFragment = new ProfileFragment();
 
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ExploreFragment.newInstance()).commit();
+
+//        setFragment(exploreFragment);
+
         // when an option in the nav bar is clicked this is what handles the click
         myBottomNavBar.setOnNavigationItemSelectedListener(new BottomNavigationView.OnNavigationItemSelectedListener()
         {
@@ -58,11 +61,15 @@ public class NavigationActivity extends AppCompatActivity
                         // change the color when selected
                         myBottomNavBar.setItemBackgroundResource(R.color.colorAccent);
                         // method call
-                        setFragment(exploreFragment);
+                        //setFragment(exploreFragment);
 
-                        Intent exploreIntent = new Intent(NavigationActivity.this, ExploreActivity.class);
-                        startActivity(exploreIntent);
-                        finish();
+
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ExploreFragment.newInstance()).commit();
+                        // ExploreFragment.newInstance();
+
+//                        Intent exploreIntent = new Intent(NavigationActivity.this, ExploreActivity.class);
+//                        startActivity(exploreIntent);
+//                        finish();
 
                         return true;
 
@@ -74,9 +81,12 @@ public class NavigationActivity extends AppCompatActivity
                         // method call
                         setFragment(createFragment);
 
-                        Intent createIntent = new Intent(NavigationActivity.this, CreateActivity.class);
-                        startActivity(createIntent);
-                        finish();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, CreateFragment.newInstance()).commit();
+
+
+//                        Intent createIntent = new Intent(NavigationActivity.this, CreateActivity.class);
+//                        startActivity(createIntent);
+//                        finish();
 
                         return true;
 
@@ -87,12 +97,16 @@ public class NavigationActivity extends AppCompatActivity
                         myBottomNavBar.setItemBackgroundResource(R.color.colorPrimaryDark);
                         // method call
                         setFragment(profileFragment);
+//
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ProfileFragment.newInstance()).commit();
 
-                        Intent profileIntent = new Intent(NavigationActivity.this, ProfileActivity.class);
-                        startActivity(profileIntent);
-                        finish();
+//                        Intent profileIntent = new Intent(NavigationActivity.this, ProfileActivity.class);
+//                        startActivity(profileIntent);
+//                        finish();
 
                         return true;
+
+                        // TODO MAP
 
                         default:
 
@@ -111,7 +125,12 @@ public class NavigationActivity extends AppCompatActivity
     private void setFragment(Fragment fragment)
     {
 
-        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction();
-        fragTransaction.replace(R.id.main_frame_layout, fragment);
+        // loads the fragment and layout
+        FragmentTransaction fragTransaction = getSupportFragmentManager().beginTransaction()
+                .replace(R.id.main_frame_layout, fragment);
+        fragTransaction.commit();
+
+//        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, fragment);
+//        ExploreFragment.newInstance();
     }
 }

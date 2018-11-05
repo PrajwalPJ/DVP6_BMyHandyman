@@ -99,10 +99,10 @@ public class MainActivity extends AppCompatActivity
 
     private void updateUI()
     {
-        Toast.makeText(MainActivity.this, "You're logged in ", Toast.LENGTH_SHORT).show();
+        Toast.makeText(MainActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
 
-        Intent accountIntent = new Intent(MainActivity.this, NavigationActivity.class);
-        startActivity(accountIntent);
+        Intent navigationIntent = new Intent(MainActivity.this, NavigationActivity.class);
+        startActivity(navigationIntent);
         finish();
     }
 

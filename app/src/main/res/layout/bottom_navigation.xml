@@ -1,14 +1,20 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
+    tools:context=".Activities.NavigationActivity"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    xmlns:app="http://schemas.android.com/apk/res-auto">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:id="@+id/main_frame_layout">
+
+    <!--<android.support.constraint.ConstraintLayout-->
+        <!--android:layout_width="match_parent"-->
+        <!--android:layout_height="match_parent">-->
 
     <ImageView
         android:id="@+id/imageView"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
         android:scaleType="centerCrop"
         android:src="@drawable/wall_one"
         app:layout_constraintBottom_toBottomOf="parent"
@@ -16,12 +22,14 @@
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="0.0" />
+        app:layout_constraintVertical_bias="0.0"
+        android:contentDescription="@string/none"/>
 
     <android.support.design.widget.BottomNavigationView
         android:id="@+id/main_navigation_bar"
         android:layout_width="match_parent"
-        android:layout_height="61dp"
+        android:layout_height="56dp"
+        android:layout_gravity="bottom"
         android:layout_alignParentBottom="true"
         android:layout_alignParentStart="true"
         app:itemBackground="@color/colorPrimary"
@@ -36,15 +44,22 @@
 
     </android.support.design.widget.BottomNavigationView>
 
-    <FrameLayout
-        android:id="@+id/main_frame_layout"
-        android:layout_width="0dp"
-        android:layout_height="0dp"
-        app:layout_constraintBottom_toTopOf="@+id/main_navigation_bar"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        <!--<FrameLayout-->
+            <!--android:id="@+id/main_frame_layout"-->
+            <!--android:layout_width="0dp"-->
+            <!--android:layout_height="0dp"-->
 
-    </FrameLayout>
+            <!--android:layout_below="@id/main_navigation_bar"-->
 
-</android.support.constraint.ConstraintLayout>
+            <!--app:layout_constraintBottom_toTopOf="@+id/main_navigation_bar"-->
+            <!--app:layout_constraintEnd_toEndOf="parent"-->
+            <!--app:layout_constraintStart_toStartOf="parent"-->
+            <!--app:layout_constraintTop_toTopOf="parent">-->
+
+        <!--</FrameLayout>-->
+
+    <!--</android.support.constraint.ConstraintLayout>-->
+
+
+
+</FrameLayout>
