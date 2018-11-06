@@ -13,6 +13,7 @@ import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.NavigationActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.ProfileActivity;
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.Person;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;
 import com.facebook.FacebookCallback;
@@ -26,6 +27,8 @@ import com.google.firebase.auth.AuthResult;
 import com.google.firebase.auth.FacebookAuthProvider;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.auth.FirebaseUser;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.util.Arrays;
 
@@ -132,6 +135,19 @@ public class MainActivity extends AppCompatActivity
                             // Sign in success, update UI with the signed-in user's information
                             Log.d(TAG, "signInWithCredential:success");
                             FirebaseUser user = mAuth.getCurrentUser();
+
+
+                            Person person = new Person(user.getDisplayName(),user.getEmail());
+
+                            DatabaseReference mDatabase;
+// ...
+                            mDatabase = FirebaseDatabase.getInstance().getReference();
+
+                            if (user != null) {
+
+                                mDatabase.child("users").child(user.getUid()).setValue(person);
+                            }
+
                             updateUI();
                         } else
                             {

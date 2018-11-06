@@ -5,6 +5,7 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -23,8 +24,11 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.ProfileActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.FieldPosition;
 import java.text.SimpleDateFormat;
@@ -38,6 +42,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     private EditText location;
     private EditText time;
     private TextView date;
+    private TextView createHandyman;
 
 
     public static CreateFragment newInstance()
@@ -66,12 +71,21 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     }
 
     @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+    }
+
+    @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
         super.onCreateOptionsMenu(menu, inflater);
 
         inflater.inflate(R.menu.menu_save, menu);
     }
+
+    private DatabaseReference mDatabase;
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -101,7 +115,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
                     // TODO // do something with this
 
-
+                    mDatabase.child("orders").push().setValue(newSerOrder);
                     // show toast for confirmation
                     Toast.makeText(getContext(), R.string.created_order_toast, Toast.LENGTH_LONG).show();
                     break;
@@ -178,6 +192,22 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
                 }
             });
+
+            createHandyman = getView().findViewById(R.id.createHandymanLink);
+
+            createHandyman.setOnClickListener(new View.OnClickListener()
+            {
+                @Override
+                public void onClick(View v)
+                {
+                    // TODO
+                    Intent intent = new Intent(getContext(), ProfileActivity.class);
+                    startActivity(intent);
+                }
+            });
+
         }
+
+
     }
 }

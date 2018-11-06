@@ -27,16 +27,6 @@
             app:srcCompat="@drawable/wall_one"
             android:contentDescription="@string/none" />
 
-        <Button
-            android:id="@+id/selectdateButton"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="16dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/select_date"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeView" />
-
         <ViewStub
             android:id="@android:id/empty"
             android:layout_width="match_parent"
@@ -48,7 +38,7 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:layout_marginTop="32dp"
-            android:text="@string/create_a_service_order"
+            android:text="List a handyman"
             android:textAlignment="center"
             android:textColor="@android:color/white"
             android:textSize="20sp"
@@ -57,24 +47,24 @@
             app:layout_constraintTop_toTopOf="@+id/imageView3" />
 
         <EditText
-            android:id="@+id/titleView"
+            android:id="@+id/titleViewHand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="32dp"
-            android:ems="10"
-            android:inputType="textPersonName"
-            android:hint="@string/title"
-            android:textColorHint="@android:color/white"
-            android:textColor="@android:color/white"
             android:backgroundTint="@android:color/white"
+            android:ems="10"
+            android:hint="@string/title"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/title" />
 
         <EditText
-            android:id="@+id/locationView"
+            android:id="@+id/locationViewHand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -82,50 +72,36 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/white"
             android:ems="10"
-            android:inputType="textPersonName"
             android:hint="@string/location"
-            android:textColorHint="@android:color/white"
+            android:inputType="textPersonName"
             android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descView" />
+            app:layout_constraintTop_toBottomOf="@+id/descViewHand" />
 
         <EditText
-            android:id="@+id/descView"
+            android:id="@+id/descViewHand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
             android:layout_marginStart="16dp"
             android:layout_marginTop="8dp"
-            android:ems="10"
-            android:textColor="@android:color/white"
-            android:inputType="textPersonName"
-            android:hint="@string/description"
             android:backgroundTint="@android:color/white"
+            android:ems="10"
+            android:lines="2"
+            android:hint="@string/description"
+            android:inputType="textPersonName"
+            android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/titleView" />
-
-        <TextView
-            android:id="@+id/view"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="20dp"
-            android:backgroundTint="@android:color/white"
-            android:ems="10"
-            android:hint="@string/date"
-            android:textColor="@android:color/white"
-            android:textColorHint="@android:color/white"
-            app:layout_constraintEnd_toStartOf="@+id/selectdateButton"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/timeView" />
+            app:layout_constraintTop_toBottomOf="@+id/titleViewHand" />
 
         <EditText
-            android:id="@+id/timeView"
+            android:id="@+id/availViewHand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -133,28 +109,14 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/white"
             android:ems="10"
-            android:hint="@string/time"
+            android:hint="Availability"
             android:inputType="time"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/locationView" />
-
-        <TextView
-            android:id="@+id/dateView"
-            android:layout_width="0dp"
-            android:layout_height="30dp"
-            android:layout_marginEnd="8dp"
-            android:layout_marginStart="20dp"
-            android:layout_marginTop="8dp"
-            android:text="@string/select_a_date"
-            android:textColor="@android:color/white"
-            app:layout_constraintEnd_toStartOf="@+id/selectdateButton"
-            app:layout_constraintHorizontal_bias="0.0"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/view" />
+            app:layout_constraintTop_toBottomOf="@+id/locationViewHand" />
 
         <TextView
             android:id="@+id/createHandymanLink"
@@ -163,7 +125,7 @@
             android:layout_marginBottom="8dp"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
-            android:text="Are you a handyman? Click here"
+            android:text="Not a handyman? Click here to post a service order"
             android:textColor="@android:color/holo_blue_dark"
             android:textStyle="italic"
             app:layout_constraintBottom_toBottomOf="parent"

@@ -1,15 +1,18 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel;
 
-public class ServiceOrder
-{
+import java.io.Serializable;
+
+public class ServiceOrder {
 
     // member variables
-    private int mId;
-    private final String mTitle;
-    private final String mDescription;
-    private final String mLocation;
-    private final String mTime;
-    private final String mDate;
+    public int mId;
+    public String mTitle;
+    public String mDescription;
+    public String mLocation;
+    public String mTime;
+    public String mDate;
+
+    public ServiceOrder() {}
 
     public ServiceOrder(String mTitle, String mDescription, String mLocation, String mTime, String mDate) {
         this.mTitle = mTitle;
