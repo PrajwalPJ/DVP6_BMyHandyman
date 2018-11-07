@@ -12,7 +12,6 @@ import android.util.Log;
 import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.NavigationActivity;
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.ProfileActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.Person;
 import com.facebook.AccessToken;
 import com.facebook.CallbackManager;

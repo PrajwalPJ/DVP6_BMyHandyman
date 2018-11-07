@@ -79,10 +79,10 @@
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.0"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@+id/descViewHand" />
+            app:layout_constraintTop_toBottomOf="@+id/bioViewHand" />
 
         <EditText
-            android:id="@+id/descViewHand"
+            android:id="@+id/bioViewHand"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="16dp"
@@ -90,15 +90,51 @@
             android:layout_marginTop="8dp"
             android:backgroundTint="@android:color/white"
             android:ems="10"
-            android:lines="2"
-            android:hint="@string/description"
+            android:hint="Bio"
             android:inputType="textPersonName"
+            android:lines="2"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintHorizontal_bias="0.497"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@+id/titleViewHand" />
+
+        <EditText
+            android:id="@+id/yearsViewHand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/white"
+            android:ems="10"
+            android:hint="Years of Experience"
+            android:inputType="time"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="0.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/availViewHand" />
+
+        <EditText
+            android:id="@+id/rateViewHand"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:layout_marginEnd="16dp"
+            android:layout_marginStart="16dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@android:color/white"
+            android:ems="10"
+            android:hint="Rate Per Hour"
+            android:inputType="time"
+            android:textColor="@android:color/white"
+            android:textColorHint="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintHorizontal_bias="1.0"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/yearsViewHand" />
 
         <EditText
             android:id="@+id/availViewHand"

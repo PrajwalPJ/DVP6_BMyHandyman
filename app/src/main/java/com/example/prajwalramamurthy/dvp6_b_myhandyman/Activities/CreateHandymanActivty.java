@@ -1,17 +1,16 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities;
 
 import android.os.Bundle;
-import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
-public class ProfileActivity extends AppCompatActivity
+public class CreateHandymanActivty extends AppCompatActivity
 {
-
     @Override
-    protected void onCreate(@Nullable Bundle savedInstanceState) {
+    protected void onCreate(Bundle savedInstanceState)
+    {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.fragment_profile);
+        setContentView(R.layout.fragment_create_handyman);
     }
 }

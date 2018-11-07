@@ -12,7 +12,6 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.ProfileActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
 public class EditProfileFragment extends Fragment

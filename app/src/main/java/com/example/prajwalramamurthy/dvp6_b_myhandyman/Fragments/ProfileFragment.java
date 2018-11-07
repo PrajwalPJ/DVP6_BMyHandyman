@@ -27,6 +27,7 @@ public class ProfileFragment extends Fragment
 {
 
     private ProfileFragmentLister myProfileListener;
+    Button verifyButton;
 
     public  interface ProfileFragmentLister
     {
@@ -36,11 +37,8 @@ public class ProfileFragment extends Fragment
     public static ProfileFragment newInstance()
     {
         
-        Bundle args = new Bundle();
-        
-        ProfileFragment fragment = new ProfileFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new ProfileFragment();
+
     }
 
     @Override
@@ -93,16 +91,19 @@ public class ProfileFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        Button verifyButton = view.findViewById(R.id.verifyButton);
+        verifyButton = view.findViewById(R.id.verifyButton);
 
-        verifyButton.setOnClickListener(new View.OnClickListener() {
+
+        verifyButton.setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
                 myProfileListener.onVerifyButtonClick();
             }
         });
 
-        view.findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener() {
+        view.findViewById(R.id.login_button).setOnClickListener(new View.OnClickListener()
+        {
             @Override
             public void onClick(View v) {
 

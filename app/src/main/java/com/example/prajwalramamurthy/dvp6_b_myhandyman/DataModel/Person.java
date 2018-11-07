@@ -16,7 +16,7 @@ public class Person
     public String mLastName;
     public String mEmail;
     public String mPhoneNumber;
-    //private final URI mImage;
+
 
     public Person(){}
 

@@ -24,6 +24,7 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.CreateHandymanActivty;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.ProfileActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
@@ -201,7 +202,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                 public void onClick(View v)
                 {
                     // TODO
-                    Intent intent = new Intent(getContext(), ProfileActivity.class);
+                    Intent intent = new Intent(getContext(), CreateHandymanActivty.class);
                     startActivity(intent);
                 }
             });
