@@ -5,6 +5,7 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.app.DatePickerDialog;
+import android.content.Context;
 import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
@@ -45,6 +46,20 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     private TextView date;
     private TextView createHandyman;
 
+    private CreateFragmentListener myCreateListener;
+
+    public interface CreateFragmentListener
+    {
+        void onAreYouAHandymanLink();
+    }
+
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+
+        myCreateListener = (CreateFragmentListener) context;
+    }
 
     public static CreateFragment newInstance()
     {
@@ -76,6 +91,17 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         super.onViewCreated(view, savedInstanceState);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        createHandyman = getView().findViewById(R.id.createHandymanLink);
+
+        createHandyman.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                myCreateListener.onAreYouAHandymanLink();
+            }
+        });
     }
 
     @Override
@@ -169,6 +195,8 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
     }
 
+
+
     @Override
     public void onActivityCreated(@Nullable Bundle savedInstanceState)
     {
@@ -194,18 +222,6 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                 }
             });
 
-            createHandyman = getView().findViewById(R.id.createHandymanLink);
-
-            createHandyman.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    // TODO
-                    Intent intent = new Intent(getContext(), CreateHandymanActivty.class);
-                    startActivity(intent);
-                }
-            });
 
         }
 

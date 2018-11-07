@@ -18,6 +18,7 @@ import android.widget.FrameLayout;
 import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateFragment;
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateHandymanFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ExploreFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ProfileFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.VerificationFragment;
@@ -26,7 +27,9 @@ import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
 import java.util.ArrayList;
 
-public class NavigationActivity extends AppCompatActivity implements ProfileFragment.ProfileFragmentLister , VerificationFragment.VerificationFragmentListener
+public class NavigationActivity extends AppCompatActivity implements ProfileFragment.ProfileFragmentLister ,
+        VerificationFragment.VerificationFragmentListener, CreateFragment.CreateFragmentListener,
+        CreateHandymanFragment.CreateHandymanListener
 {
 
     // member/stored variables
@@ -36,6 +39,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     private ExploreFragment exploreFragment;
     private ProfileFragment profileFragment;
     private VerificationFragment verificationFragment;
+    private CreateHandymanFragment createHandymanFragment;
 
     private static final int PICTURE_REQUEST = 0x0101;
 
@@ -158,6 +162,19 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     }
 
 
+    @Override
+    public void onAreYouAHandymanLink()
+    {
+        createHandymanFragment = CreateHandymanFragment.newInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,createHandymanFragment).commit();
+    }
+
+    @Override
+    public void onPostServiceOrderLink()
+    {
+        createFragment = CreateFragment.newInstance();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, createFragment).commit();
+    }
 }
 
 

@@ -1,5 +1,6 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
+import android.content.Context;
 import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -32,6 +33,21 @@ public class CreateHandymanFragment extends Fragment
     private EditText  mHourRate;
 
     private TextView createServiceOrder;
+
+    private CreateHandymanListener myCreateHandymanListener;
+
+    public interface CreateHandymanListener
+    {
+        void onPostServiceOrderLink();
+    }
+
+    @Override
+    public void onAttach(Context context)
+    {
+        super.onAttach(context);
+
+        myCreateHandymanListener = (CreateHandymanFragment.CreateHandymanListener) context;
+    }
 
     public static CreateHandymanFragment newInstance()
     {
@@ -90,7 +106,7 @@ public class CreateHandymanFragment extends Fragment
                     Handyman handyman = new Handyman(title, bio, location, avil, years, rate);
 
 
-                    mDatabase.child("orders").push().setValue(handyman);
+                    mDatabase.child("handyman").push().setValue(handyman);
                     // show toast for confirmation
                     Toast.makeText(getContext(), R.string.created_order_toast, Toast.LENGTH_LONG).show();
                     break;
@@ -108,6 +124,17 @@ public class CreateHandymanFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
+
+        createServiceOrder = getView().findViewById(R.id.createServiceOrderLink);
+
+        createServiceOrder.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                myCreateHandymanListener.onPostServiceOrderLink();
+            }
+        });
     }
 
     @Override
@@ -124,18 +151,18 @@ public class CreateHandymanFragment extends Fragment
             mHourRate = getView().findViewById(R.id.rateViewHand);
 
 
-            createServiceOrder = getView().findViewById(R.id.createHandymanLink);
-
-            createServiceOrder.setOnClickListener(new View.OnClickListener()
-            {
-                @Override
-                public void onClick(View v)
-                {
-                    // TODO
-                    Intent intent = new Intent(getContext(), CreateActivity.class);
-                    startActivity(intent);
-                }
-            });
+//            createServiceOrder = getView().findViewById(R.id.createHandymanLink);
+//
+//            createServiceOrder.setOnClickListener(new View.OnClickListener()
+//            {
+//                @Override
+//                public void onClick(View v)
+//                {
+//                    // TODO
+//                    Intent intent = new Intent(getContext(), CreateActivity.class);
+//                    startActivity(intent);
+//                }
+//            });
 
         }
     }
