@@ -8,14 +8,17 @@ import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.ListView;
 
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters.HandymanAdapter;
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters.ServiceOrderAdapter;
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.Handyman;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 import com.google.firebase.database.DataSnapshot;
@@ -25,35 +28,34 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
-import java.util.List;
 
 public class ExploreFragment extends Fragment
 {
 
-    public static ExploreFragment newInstance()
+    private final ArrayList<ServiceOrder> orders = new ArrayList<>();
+    private final ArrayList<Handyman> handymen = new ArrayList<>();
+    private ServiceOrderAdapter serviceOrderAdapter;
+    private ListView myListView;
+    private String selector;
+    private HandymanAdapter handyManAdapter;
+
+    public static ExploreFragment newInstance(String selector)
     {
 
-        Bundle args = new Bundle();
+
 
         ExploreFragment fragment = new ExploreFragment();
-        fragment.setArguments(args);
+        fragment.selector = selector;
         return fragment;
     }
 
-    public ExploreFragment()
-    {
 
-    }
-
-    ArrayList<ServiceOrder> orders = new ArrayList<>();
-
-    private DatabaseReference mDatabase;
 
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         ValueEventListener postListener = new ValueEventListener() {
             @Override
@@ -61,8 +63,20 @@ public class ExploreFragment extends Fragment
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
 
-                    ServiceOrder order = postSnapshot.getValue(ServiceOrder.class);
-                    orders.add(order);
+                    if(selector == "orders") {
+                        ServiceOrder order = postSnapshot.getValue(ServiceOrder.class);
+                        orders.add(order);
+                    } else {
+                        Handyman order = postSnapshot.getValue(Handyman.class);
+                        handymen.add(order);
+                    }
+
+                    // notify that its changed and refresh the database
+
+
+                    serviceOrderAdapter.notifyDataSetChanged();
+                    handyManAdapter.notifyDataSetChanged();
+                    //myListView.deferNotifyDataSetChanged();
                 }
             }
 
@@ -74,8 +88,22 @@ public class ExploreFragment extends Fragment
             }
         };
 
-        mDatabase.child("orders").addValueEventListener(postListener);
+        mDatabase.child(selector  == "orders"? "orders" : "handyman").addValueEventListener(postListener);
+
+       serviceOrderAdapter = new ServiceOrderAdapter(getContext(), orders);
+        handyManAdapter = new HandymanAdapter(getContext(), handymen);
+
+        myListView = view.findViewById(R.id.myListView);
+
+
+        if (selector  == "orders") {
+            myListView.setAdapter(serviceOrderAdapter);
+        } else {
+            myListView.setAdapter(handyManAdapter);
+        }
+
     }
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
@@ -83,6 +111,8 @@ public class ExploreFragment extends Fragment
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
+
+
     }
 
     @Nullable
@@ -118,4 +148,5 @@ public class ExploreFragment extends Fragment
 
         return true;
     }
+
 }

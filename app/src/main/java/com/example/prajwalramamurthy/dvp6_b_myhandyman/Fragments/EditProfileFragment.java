@@ -18,11 +18,9 @@ public class EditProfileFragment extends Fragment
 {
     public static EditProfileFragment newInstance() {
 
-        Bundle args = new Bundle();
 
-        EditProfileFragment fragment = new EditProfileFragment();
-        fragment.setArguments(args);
-        return fragment;
+        return new EditProfileFragment();
+
     }
 
     @Nullable

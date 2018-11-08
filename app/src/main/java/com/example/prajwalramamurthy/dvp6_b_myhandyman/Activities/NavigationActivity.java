@@ -4,7 +4,6 @@ package com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities;
 
 import android.content.Intent;
 import android.graphics.Bitmap;
-import android.net.Uri;
 import android.os.Bundle;
 import android.provider.MediaStore;
 import android.support.annotation.NonNull;
@@ -13,19 +12,15 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.Button;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateHandymanFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ExploreFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ProfileFragment;
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.TabFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.VerificationFragment;
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.MainActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
-
-import java.util.ArrayList;
 
 public class NavigationActivity extends AppCompatActivity implements ProfileFragment.ProfileFragmentLister ,
         VerificationFragment.VerificationFragmentListener, CreateFragment.CreateFragmentListener,
@@ -34,9 +29,8 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
 
     // member/stored variables
     private BottomNavigationView myBottomNavBar;
-    private FrameLayout myMainFrame;
     private CreateFragment createFragment;
-    private ExploreFragment exploreFragment;
+    private TabFragment exploreFragment;
     private ProfileFragment profileFragment;
     private VerificationFragment verificationFragment;
     private CreateHandymanFragment createHandymanFragment;
@@ -50,16 +44,16 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
         setContentView(R.layout.bottom_navigation);
 
         // initialize my bottom navigation bar and my frame layout
-        myMainFrame = findViewById(R.id.main_frame_layout);
+        FrameLayout myMainFrame = findViewById(R.id.main_frame_layout);
         myBottomNavBar = findViewById(R.id.main_navigation_bar);
 
 
         // initialize my fragments
-        createFragment = new CreateFragment();
-        exploreFragment = new ExploreFragment();
-        profileFragment = new ProfileFragment();
+        createFragment = CreateFragment.newInstance();
+        exploreFragment = TabFragment.newInstance();
+        profileFragment = ProfileFragment.newInstance();
 
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ExploreFragment.newInstance()).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, exploreFragment).commit();
 
         final Menu menu = myBottomNavBar.getMenu();
         final MenuItem menuItem = menu.getItem(0);
@@ -77,8 +71,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
 
                         // change the color when selected
 
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ExploreFragment.newInstance()).commit();
-
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, exploreFragment).commit();
 
                         return true;
 
@@ -87,7 +80,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
                         // change the color when selected
                         myBottomNavBar.setItemBackgroundResource(R.color.colorPrimary);
 
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, CreateFragment.newInstance()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,createFragment).commit();
 
                         return true;
 
@@ -96,7 +89,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
 
                         // change the color when selected
 
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, ProfileFragment.newInstance()).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, profileFragment).commit();
 
                         return true;
 
@@ -150,8 +143,6 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     public void saveVerifiedData()
     {
 
-
-        profileFragment = ProfileFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,profileFragment).commit();
 
     }

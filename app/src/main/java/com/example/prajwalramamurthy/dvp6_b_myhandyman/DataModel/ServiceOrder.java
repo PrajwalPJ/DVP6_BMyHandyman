@@ -1,7 +1,5 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel;
 
-import java.io.Serializable;
-
 public class ServiceOrder {
 
     // member variables

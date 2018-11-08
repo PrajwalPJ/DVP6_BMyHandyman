@@ -37,7 +37,7 @@ public class MainActivity extends AppCompatActivity
 
     private FirebaseAuth mAuth;
     private CallbackManager callbackManager;
-    public static final String TAG = "FACEBOOK_LOGIN";
+    private static final String TAG = "FACEBOOK_LOGIN";
 
 
 

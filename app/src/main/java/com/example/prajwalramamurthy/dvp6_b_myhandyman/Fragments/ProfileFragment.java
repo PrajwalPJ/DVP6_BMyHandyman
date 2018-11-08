@@ -5,7 +5,6 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -20,14 +19,12 @@ import android.widget.Button;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 import com.google.firebase.auth.FirebaseAuth;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 
 public class ProfileFragment extends Fragment
 {
 
     private ProfileFragmentLister myProfileListener;
-    Button verifyButton;
+    private Button verifyButton;
 
     public  interface ProfileFragmentLister
     {
@@ -66,18 +63,7 @@ public class ProfileFragment extends Fragment
     }
 
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item) {
-        return super.onOptionsItemSelected(item);
-    }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-
-
-    }
 
     @Override
     public void onAttach(Context context) {

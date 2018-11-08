@@ -6,7 +6,6 @@ package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.app.DatePickerDialog;
 import android.content.Context;
-import android.content.Intent;
 import android.content.SharedPreferences;
 import android.os.Bundle;
 import android.preference.PreferenceManager;
@@ -25,16 +24,17 @@ import android.widget.EditText;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.CreateHandymanActivty;
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.ProfileActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
 import java.text.FieldPosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
+import java.util.Objects;
+import java.util.TimeZone;
 
 public class CreateFragment extends Fragment implements DatePickerDialog.OnDateSetListener
 {
@@ -44,7 +44,6 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     private EditText location;
     private EditText time;
     private TextView date;
-    private TextView createHandyman;
 
     private CreateFragmentListener myCreateListener;
 
@@ -92,7 +91,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        createHandyman = getView().findViewById(R.id.createHandymanLink);
+        TextView createHandyman = Objects.requireNonNull(getView()).findViewById(R.id.createHandymanLink);
 
         createHandyman.setOnClickListener(new View.OnClickListener()
         {
@@ -109,6 +108,9 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     {
         super.onCreateOptionsMenu(menu, inflater);
 
+        MenuItem search = menu.findItem(R.id.search_button);
+
+        search.setVisible(false);
         inflater.inflate(R.menu.menu_save, menu);
     }
 
@@ -142,6 +144,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
                     // TODO // do something with this
 
+                    //mDatabase.child("users").child(FirebaseAuth.getInstance().getUid()).child("reviews").push().
                     mDatabase.child("orders").push().setValue(newSerOrder);
                     // show toast for confirmation
                     Toast.makeText(getContext(), R.string.created_order_toast, Toast.LENGTH_LONG).show();
@@ -160,10 +163,40 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     {
         if(getContext() != null)
         {
-            DatePickerDialog datePicker = new DatePickerDialog(getContext(), this, 2018, 11, 8);
+
+            Calendar cal = Calendar.getInstance(TimeZone.getDefault()); // Get current date
+
+// Create the DatePickerDialog instance
+            DatePickerDialog datePicker = new DatePickerDialog(getContext(),
+                    R.style.AppTheme, datePickerListener,
+                    cal.get(Calendar.YEAR),
+                    cal.get(Calendar.MONTH),
+                    cal.get(Calendar.DAY_OF_MONTH));
+            datePicker.setCancelable(false);
+            datePicker.setTitle("Select the date");
             datePicker.show();
+
+
+
+//            DatePickerDialog datePicker = new DatePickerDialog(getContext(), this, 2018, 11, 8);
+//            datePicker.show();
         }
     }
+
+    // Listener
+    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
+
+        // when dialog box is closed, below method will be called.
+        public void onDateSet(DatePicker view, int selectedYear,
+                              int selectedMonth, int selectedDay) {
+            String year1 = String.valueOf(selectedYear);
+            String month1 = String.valueOf(selectedMonth + 1);
+            String day1 = String.valueOf(selectedDay);
+//            TextView tvDt = (TextView) findViewById(R.id.tvDate);
+           date.setText(day1 + "/" + month1 + "/" + year1);
+
+        }
+    };
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)

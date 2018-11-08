@@ -4,9 +4,6 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel;
 
-import java.io.Serializable;
-import java.net.URI;
-
 public class Person
 {
 

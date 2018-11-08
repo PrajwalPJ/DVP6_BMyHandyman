@@ -1,7 +1,9 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Bitmap;
+import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -16,14 +18,19 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.Toast;
 
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.NavigationActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
+
+import static android.app.Activity.RESULT_OK;
 
 public class VerificationFragment extends Fragment
 {
-    private ProfileFragment profileFragment;
     private static final String POST = "POST";
+    private static final String ARG_URI = "ARG_URI";
+    private static final int PICTURE_REQUEST = 0x0101;
     Button verifyButton;
+    private Uri imageUri;
+    Button uploadImgButton;
+    private ImageView photoViewImage;
 
     public interface VerificationFragmentListener
     {
@@ -48,7 +55,7 @@ public class VerificationFragment extends Fragment
         myVerificationListener = (VerificationFragmentListener) context;
     }
 
-    ImageView photoViewImage;
+
 
     public void displayImage( Bitmap imageUri )
     {
@@ -61,6 +68,26 @@ public class VerificationFragment extends Fragment
         super.onViewCreated(view, savedInstanceState);
 
         photoViewImage = view.findViewById(R.id.photoVIew);
+        uploadImgButton = view.findViewById(R.id.uploadImageButton);
+
+
+
+        // if upload ID button is clicked this will take place
+        uploadImgButton.setOnClickListener(new View.OnClickListener()
+        {
+            @Override
+            public void onClick(View v)
+            {
+                // then create a new intent
+                Intent intentCamera = new Intent(Intent.ACTION_PICK);
+
+                intentCamera.setType("image/jpeg");
+                // start activity
+                startActivityForResult(intentCamera, PICTURE_REQUEST);
+
+
+            }
+        });
 
         view.findViewById(R.id.saveVerifiyButton).setOnClickListener(new View.OnClickListener()
         {
@@ -68,7 +95,8 @@ public class VerificationFragment extends Fragment
             public void onClick(View v)
             {
 
-                if(photoViewImage.getDrawable() != null) {
+                if(photoViewImage.getDrawable() != null)
+                {
                     Toast.makeText(getContext(), "Photo was saved!", Toast.LENGTH_SHORT).show();
 
 //                    verifyButton = profileFragment.verifyButton.findViewById(R.id.verifyButton);
@@ -82,17 +110,26 @@ public class VerificationFragment extends Fragment
     }
 
     @Override
+    public void onActivityResult(int requestCode, int resultCode, Intent data)
+    {
+        super.onActivityResult(requestCode, resultCode, data);
+
+        if(resultCode == RESULT_OK && requestCode == PICTURE_REQUEST)
+        {
+            imageUri = data.getData();
+            photoViewImage.setImageURI(imageUri);
+        }
+    }
+
+    @Override
     public void onCreate(@Nullable Bundle savedInstanceState)
     {
         super.onCreate(savedInstanceState);
 
         setHasOptionsMenu(true);
 
-        profileFragment = new ProfileFragment();
+        ProfileFragment profileFragment = new ProfileFragment();
     }
-
-
-
 
 
     @Nullable
@@ -119,9 +156,8 @@ public class VerificationFragment extends Fragment
                 myVerificationListener.saveVerifiedData();
 
                 break;
+
         }
-
-
 
         return super.onOptionsItemSelected(item);
     }
