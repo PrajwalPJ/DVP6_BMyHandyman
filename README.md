@@ -11,3 +11,15 @@ PROBLEMS THE APP SOLVES/WHAT THE APP DOES
 PROBLEMS THE APP DOES NOT SOLVE/WHAT THE APP DOES NOT DO
 1.	App does not allow in app payments as of now.
 
+HOW TO RUN THE APP 
+1. As on now I have not made it public for facebook. Only I will be able to login to my facebook. 
+2. If you want to test the app then we need to skip the Facebook login. 
+
+Step One: Go to Manifest and change the main launch activity from .MainActivity to .NavigationActivity
+Step Two: Comment out the NavigationActivity at the bottom on Manifest file
+
+Now you will be able to test the rest of the app. 
+
+I worked extremely hard this week and put in over 50 hours logged on my milestone two. I have 90% of my milestone done. Just need to tweak on a few things a little. I already fixed the couple issues I have having during my presentation. 
+
+
