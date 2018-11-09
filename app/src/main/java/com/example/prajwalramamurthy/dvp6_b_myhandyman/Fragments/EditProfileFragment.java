@@ -42,6 +42,8 @@ public class EditProfileFragment extends Fragment
     {
         super.onCreateOptionsMenu(menu, inflater);
 
+        menu.clear();
+
         inflater.inflate(R.menu.menu_save, menu);
     }
 

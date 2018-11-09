@@ -10,6 +10,7 @@ import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
+import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
@@ -40,6 +41,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
         setContentView(R.layout.bottom_navigation);
 
@@ -71,7 +73,8 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
 
                         // change the color when selected
 
-                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, exploreFragment).commit();
+                        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, TabFragment.newInstance()).commit();
+                        exploreFragment.onResume();
 
                         return true;
 

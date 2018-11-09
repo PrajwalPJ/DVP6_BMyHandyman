@@ -46,8 +46,8 @@ public class TabFragment extends Fragment {
 
 
         TabLayout tabLayout =  view.findViewById(R.id.tab_layout);
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 1"));
-        tabLayout.addTab(tabLayout.newTab().setText("Tab 2"));
+        tabLayout.addTab(tabLayout.newTab().setText("Service Order"));
+        tabLayout.addTab(tabLayout.newTab().setText("Handyman"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
         final ViewPager viewPager =  view.findViewById(R.id.pager);

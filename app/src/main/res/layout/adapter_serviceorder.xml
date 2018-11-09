@@ -1,13 +1,14 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
     <ImageView
         android:id="@+id/imageView7"
-        android:layout_width="0dp"
-        android:layout_height="147dp"
+        android:layout_width="match_parent"
+        android:layout_height="152dp"
         android:contentDescription="@string/none"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
@@ -17,16 +18,84 @@
         app:srcCompat="@drawable/explore_back" />
 
     <TextView
-        android:id="@+id/titleViewAdapter"
-        android:layout_width="0dp"
-        android:layout_height="21dp"
-        android:layout_marginStart="140dp"
+        android:id="@+id/titleOrderView"
+        android:layout_width="218dp"
+        android:layout_height="wrap_content"
+        android:layout_alignTop="@+id/imageView7"
+        android:layout_alignEnd="@+id/imageView7"
+        android:layout_alignParentStart="true"
+        android:layout_marginStart="160dp"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="8dp"
+        android:layout_marginEnd="6dp"
         android:hint="@string/title"
+        android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-</android.support.constraint.ConstraintLayout>
+    <TextView
+    android:id="@+id/descOrderView"
+    android:layout_width="wrap_content"
+    android:layout_height="wrap_content"
+    android:layout_below="@+id/titleOrderView"
+    android:layout_alignParentStart="true"
+    android:layout_alignParentEnd="true"
+    android:layout_marginStart="160dp"
+    android:layout_marginTop="8dp"
+    android:layout_marginEnd="6dp"
+    android:text="@string/description"
+    android:textColor="@android:color/white"
+    app:layout_constraintEnd_toEndOf="parent"
+    app:layout_constraintStart_toStartOf="@+id/titleOrderView"
+    tools:layout_editor_absoluteY="51dp" />
+
+    <TextView
+        android:id="@+id/locOrderView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/descOrderView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        android:text="@string/location"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/descOrderView"
+        tools:layout_editor_absoluteY="51dp" />
+
+    <TextView
+        android:id="@+id/timeOrderView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/locOrderView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        android:text="@string/time"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/descOrderView"
+        tools:layout_editor_absoluteY="51dp" />
+
+    <TextView
+        android:id="@+id/dateOrderView"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_below="@+id/timeOrderView"
+        android:layout_alignParentStart="true"
+        android:layout_alignParentEnd="true"
+        android:layout_marginStart="160dp"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="6dp"
+        android:text="@string/date"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="@+id/descOrderView"
+        tools:layout_editor_absoluteY="51dp" />
+
+</RelativeLayout>

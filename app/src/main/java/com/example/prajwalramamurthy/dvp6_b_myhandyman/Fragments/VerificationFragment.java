@@ -167,6 +167,8 @@ public class VerificationFragment extends Fragment
     {
         super.onCreateOptionsMenu(menu, inflater);
 
+        menu.clear();
+
         inflater.inflate(R.menu.menu_camera, menu);
     }
 

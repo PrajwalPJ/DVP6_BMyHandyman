@@ -49,11 +49,10 @@ public class ExploreFragment extends Fragment
         return fragment;
     }
 
-
-
     @Override
-    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
-        super.onViewCreated(view, savedInstanceState);
+    public void onResume() {
+        super.onResume();
+
 
         DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -90,7 +89,14 @@ public class ExploreFragment extends Fragment
 
         mDatabase.child(selector  == "orders"? "orders" : "handyman").addValueEventListener(postListener);
 
-       serviceOrderAdapter = new ServiceOrderAdapter(getContext(), orders);
+    }
+
+    @Override
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
+        super.onViewCreated(view, savedInstanceState);
+
+
+        serviceOrderAdapter = new ServiceOrderAdapter(getContext(), orders);
         handyManAdapter = new HandymanAdapter(getContext(), handymen);
 
         myListView = view.findViewById(R.id.myListView);
@@ -110,7 +116,8 @@ public class ExploreFragment extends Fragment
     {
         super.onCreate(savedInstanceState);
 
-        setHasOptionsMenu(true);
+
+setHasOptionsMenu(true);
 
 
     }
@@ -119,6 +126,7 @@ public class ExploreFragment extends Fragment
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+     setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_explore, container, false);
     }
 
@@ -131,22 +139,19 @@ public class ExploreFragment extends Fragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
+
         super.onCreateOptionsMenu(menu, inflater);
 
+        menu.clear();
+
+//        MenuItem search = menu.findItem(R.id.search_button);
+//
+//        if (search != null) {
+//            search.setVisible(false);
+//        }
         inflater.inflate(R.menu.menu_search, menu);
     }
 
-    @Override
-    public boolean onOptionsItemSelected(MenuItem item)
-    {
-        Integer itemId = item.getItemId();
 
-        switch (itemId)
-        {
-
-        }
-
-        return true;
-    }
 
 }

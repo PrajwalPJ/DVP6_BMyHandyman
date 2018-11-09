@@ -67,6 +67,9 @@ public class CreateHandymanFragment extends Fragment
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
         super.onCreateOptionsMenu(menu, inflater);
+
+        menu.clear();
+
         inflater.inflate(R.menu.menu_save, menu);
     }
 
@@ -144,20 +147,6 @@ public class CreateHandymanFragment extends Fragment
             mAvailability = getView().findViewById(R.id.availViewHand);
             mYearsExp = getView().findViewById(R.id.yearsViewHand);
             mHourRate = getView().findViewById(R.id.rateViewHand);
-
-
-//            createServiceOrder = getView().findViewById(R.id.createHandymanLink);
-//
-//            createServiceOrder.setOnClickListener(new View.OnClickListener()
-//            {
-//                @Override
-//                public void onClick(View v)
-//                {
-//                    // TODO
-//                    Intent intent = new Intent(getContext(), CreateActivity.class);
-//                    startActivity(intent);
-//                }
-//            });
 
         }
     }

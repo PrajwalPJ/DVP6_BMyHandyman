@@ -12,6 +12,7 @@ import android.preference.PreferenceManager;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -36,8 +37,11 @@ import java.util.Calendar;
 import java.util.Objects;
 import java.util.TimeZone;
 
+import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
+
 public class CreateFragment extends Fragment implements DatePickerDialog.OnDateSetListener
 {
+
 
     private EditText title;
     private EditText desc;
@@ -82,6 +86,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_create, container, false);
     }
 
@@ -101,16 +106,29 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                 myCreateListener.onAreYouAHandymanLink();
             }
         });
+
+
     }
+
+//    @Override
+//    public void onPrepareOptionsMenu(Menu menu)
+//    {
+//        menu.getItem(0).setEnabled(false);
+//        super.onPrepareOptionsMenu(menu);
+//    }
 
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
+
         super.onCreateOptionsMenu(menu, inflater);
 
         MenuItem search = menu.findItem(R.id.search_button);
 
         search.setVisible(false);
+
+        menu.clear();
+
         inflater.inflate(R.menu.menu_save, menu);
     }
 
@@ -126,6 +144,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
             // when my save button is clicked this is what will run
             case R.id.save_button:
             {
+                Log.i("tag", "onOptionsItemSelected: MY SAVE BUTTON!!!!!" );
                 if (title.getText().toString().isEmpty() || desc.getText().toString().isEmpty()
                         || location.getText().toString().isEmpty() || time.getText().toString().isEmpty())
                 {
@@ -148,14 +167,14 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                     mDatabase.child("orders").push().setValue(newSerOrder);
                     // show toast for confirmation
                     Toast.makeText(getContext(), R.string.created_order_toast, Toast.LENGTH_LONG).show();
-                    break;
-                }
 
+                }
+        return true;
             }
 
 
         }
-        return true;
+        return false;
     }
 
     // shows the date picker when user clicks on select date
@@ -164,61 +183,34 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         if(getContext() != null)
         {
 
-            Calendar cal = Calendar.getInstance(TimeZone.getDefault()); // Get current date
 
-// Create the DatePickerDialog instance
-            DatePickerDialog datePicker = new DatePickerDialog(getContext(),
-                    R.style.AppTheme, datePickerListener,
-                    cal.get(Calendar.YEAR),
-                    cal.get(Calendar.MONTH),
-                    cal.get(Calendar.DAY_OF_MONTH));
-            datePicker.setCancelable(false);
-            datePicker.setTitle("Select the date");
+            DatePickerDialog datePicker = new DatePickerDialog(getContext(), this, 2018, 11, 8);
             datePicker.show();
-
-
-
-//            DatePickerDialog datePicker = new DatePickerDialog(getContext(), this, 2018, 11, 8);
-//            datePicker.show();
         }
     }
 
-    // Listener
-    private DatePickerDialog.OnDateSetListener datePickerListener = new DatePickerDialog.OnDateSetListener() {
-
-        // when dialog box is closed, below method will be called.
-        public void onDateSet(DatePicker view, int selectedYear,
-                              int selectedMonth, int selectedDay) {
-            String year1 = String.valueOf(selectedYear);
-            String month1 = String.valueOf(selectedMonth + 1);
-            String day1 = String.valueOf(selectedDay);
-//            TextView tvDt = (TextView) findViewById(R.id.tvDate);
-           date.setText(day1 + "/" + month1 + "/" + year1);
-
-        }
-    };
 
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)
     {
 
 
-        //SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
+        SimpleDateFormat formatter = new SimpleDateFormat("MM-dd-yyyy");
 
         Calendar calendar = Calendar.getInstance();
         calendar.set(Calendar.YEAR,year);
         calendar.set(Calendar.MONTH,month);
         calendar.set(Calendar.DAY_OF_MONTH,dayOfMonth);
 
-        //StringBuffer sb = new StringBuffer();
+        StringBuffer sb = new StringBuffer();
 
-        //String hireDate = formatter.format(calendar.getTime(), sb, new FieldPosition(0)).toString();
+        String hireDate = formatter.format(calendar.getTime(), sb, new FieldPosition(0)).toString();
 
         SharedPreferences sharedPref = PreferenceManager.getDefaultSharedPreferences(getContext());
 
         StringBuffer infoType = new StringBuffer();
 
-        String stringPref = sharedPref.getString("dateType", "09/12/18");
+        String stringPref = sharedPref.getString("dateType", hireDate);
 
         SimpleDateFormat simpDate = new SimpleDateFormat(stringPref);
 

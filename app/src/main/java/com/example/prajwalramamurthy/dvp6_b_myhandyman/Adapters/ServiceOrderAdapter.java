@@ -85,7 +85,11 @@ public class ServiceOrderAdapter extends BaseAdapter
         // see if person is null
         if(p != null)
         {
-            viewHolder.tv_fullName.setText(p.mTitle);
+            viewHolder.title.setText(p.mTitle);
+            viewHolder.desc.setText(p.mDescription);
+            viewHolder.loc.setText(p.mLocation);
+            viewHolder.time.setText(p.mTime);
+//            viewHolder.date.setText(p.mDate);
 
             return convertView;
         }
@@ -95,12 +99,20 @@ public class ServiceOrderAdapter extends BaseAdapter
     // Optimize with view holder!
     static class ViewHolder
     {
-        final TextView tv_fullName;
+        final TextView title;
+        final TextView desc;
+        final TextView loc;
+        final TextView time;
+        final TextView date;
 
 
         ViewHolder(View layout)
         {
-            tv_fullName = layout.findViewById(R.id.titleViewAdapter);
+            title = layout.findViewById(R.id.titleOrderView);
+            desc = layout.findViewById(R.id.descOrderView);
+            loc = layout.findViewById(R.id.locOrderView);
+            time = layout.findViewById(R.id.timeOrderView);
+            date = layout.findViewById(R.id.dateOrderView);
 
         }
     }
