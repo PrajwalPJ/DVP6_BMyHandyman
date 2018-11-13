@@ -64,7 +64,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/man"
+        app:srcCompat="@drawable/logo"
         android:contentDescription="@string/none" />
 
     <TextView

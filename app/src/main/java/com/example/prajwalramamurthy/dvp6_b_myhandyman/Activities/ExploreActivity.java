@@ -4,7 +4,15 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities;
 
+import android.app.SearchManager;
+import android.content.Context;
+import android.os.Bundle;
 import android.support.v7.app.AppCompatActivity;
+import android.view.Menu;
+import android.widget.SearchView;
+
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ExploreFragment;
+//import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
 public class ExploreActivity extends AppCompatActivity
 {
@@ -15,8 +23,8 @@ public class ExploreActivity extends AppCompatActivity
 //        super.onCreate(savedInstanceState);
 //        setContentView(R.layout.fragment_explore);
 //
-//        getSupportFragmentManager().beginTransaction()
-//                .replace(R.id.main_frame, ExploreFragment.newInstance()).commit();
+////        getSupportFragmentManager().beginTransaction()
+////                .replace(R.id.main_frame, ExploreFragment.newInstance()).commit();
 //    }
 //
 //    @Override
@@ -24,6 +32,16 @@ public class ExploreActivity extends AppCompatActivity
 //    {
 //
 //        getMenuInflater().inflate(R.menu.menu_search, menu);
+//
+//        SearchManager searchManager = (SearchManager)
+//                getSystemService(Context.SEARCH_SERVICE);
+//        searchMenuItem = menu.findItem(R.id.);
+//        searchView = (SearchView) searchMenuItem.getActionView();
+//
+//        searchView.setSearchableInfo(searchManager.
+//                getSearchableInfo(getComponentName()));
+//        searchView.setSubmitButtonEnabled(true);
+//        searchView.setOnQueryTextListener(this);
 //
 //        return true;
 //    }

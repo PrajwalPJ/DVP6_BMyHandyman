@@ -9,13 +9,14 @@
         android:id="@+id/imageView7"
         android:layout_width="match_parent"
         android:layout_height="152dp"
+        android:adjustViewBounds="false"
         android:contentDescription="@string/none"
         android:scaleType="centerCrop"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.0"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:srcCompat="@drawable/explore_back" />
+        app:srcCompat="@drawable/explore_back_old" />
 
     <TextView
         android:id="@+id/titleOrderView"

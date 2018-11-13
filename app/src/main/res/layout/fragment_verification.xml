@@ -9,19 +9,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="32dp"
-        android:text="Upload or take an image to verify documentation"
+        android:text="@string/upload_or_take_an_image_to_verify_documentation"
+        android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <Button
         android:id="@+id/uploadImageButton"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
         android:layout_marginTop="8dp"
-        android:text="Upload ID"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        android:text="@string/upload_id"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"
+        app:layout_constraintEnd_toEndOf="@+id/photoVIew"
+        app:layout_constraintStart_toStartOf="@+id/photoVIew"
         app:layout_constraintTop_toBottomOf="@+id/textView" />
 
     <ImageView
@@ -33,19 +36,19 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/uploadImageButton"
-        android:contentDescription="TODO" />
+        android:contentDescription="@string/none" />
 
     <Button
         android:id="@+id/saveVerifiyButton"
-        android:layout_width="120dp"
+        android:layout_width="0dp"
         android:layout_height="40dp"
-        android:layout_marginBottom="8dp"
-        android:layout_marginEnd="8dp"
-        android:layout_marginStart="8dp"
         android:layout_marginTop="8dp"
-        android:text="Save"
+        android:layout_marginBottom="8dp"
+        android:text="@string/save"
+        android:backgroundTint="@color/colorPrimary"
+        android:textColor="@android:color/white"
         app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintEnd_toEndOf="@+id/photoVIew"
+        app:layout_constraintStart_toStartOf="@+id/photoVIew"
         app:layout_constraintTop_toBottomOf="@+id/photoVIew" />
 </android.support.constraint.ConstraintLayout>

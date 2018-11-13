@@ -1,10 +1,12 @@
 <?xml version="1.0" encoding="utf-8"?>
 <resources>
-    <color name="colorPrimary">#e56b482a</color>
-    <color name="colorPrimaryDark">#53331e</color>
+    <color name="colorPrimary">#8E3135</color>
+    <color name="colorPrimaryDark">#210F24</color>
     <color name="colorAccent">#FF4081</color>
 
     <color name="transp_brown">#8d442b0f</color>
 
     <color name="skyBlue">#87CEEB</color>
+
+    <color name="baige">#FFA833</color>
 </resources>

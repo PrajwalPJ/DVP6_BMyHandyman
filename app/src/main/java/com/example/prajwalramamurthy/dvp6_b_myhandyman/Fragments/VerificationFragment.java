@@ -1,13 +1,17 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
+import android.app.NativeActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
 import android.net.Uri;
+import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
+import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
+import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -19,6 +23,10 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+
+import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
 
@@ -31,6 +39,8 @@ public class VerificationFragment extends Fragment
     private Uri imageUri;
     Button uploadImgButton;
     private ImageView photoViewImage;
+
+    private DatabaseReference mDatabase;
 
     public interface VerificationFragmentListener
     {
@@ -67,6 +77,8 @@ public class VerificationFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
+        mDatabase = FirebaseDatabase.getInstance().getReference();
+
         photoViewImage = view.findViewById(R.id.photoVIew);
         uploadImgButton = view.findViewById(R.id.uploadImageButton);
 
@@ -99,6 +111,17 @@ public class VerificationFragment extends Fragment
                 {
                     Toast.makeText(getContext(), "Photo was saved!", Toast.LENGTH_SHORT).show();
 
+//
+//                    Bitmap bmp =  BitmapFactory.decodeResource(getResources(),R.drawable.chicken);//your image
+//                    ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
+//                    bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
+//                    bmp.recycle();
+//                    byte[] byteArray = bYtE.toByteArray();
+//                    String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+
+//                    byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
+//                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
+
 //                    verifyButton = profileFragment.verifyButton.findViewById(R.id.verifyButton);
 //                    verifyButton.setBackgroundColor(getResources().getColor(R.color.skyBlue ));
                 }
@@ -107,6 +130,19 @@ public class VerificationFragment extends Fragment
         });
 
 
+    }
+
+    @RequiresApi(api = Build.VERSION_CODES.M)
+    private void checkFilePermissions() {
+        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+            int permissionCheck = Objects.requireNonNull(getContext()).checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
+            permissionCheck += Objects.requireNonNull(getContext()).checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
+            if (permissionCheck != 0) {
+                this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001); //Any number
+            }
+        }else{
+            Log.d("", "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
+        }
     }
 
     @Override
@@ -128,7 +164,7 @@ public class VerificationFragment extends Fragment
 
         setHasOptionsMenu(true);
 
-        ProfileFragment profileFragment = new ProfileFragment();
+
     }
 
 

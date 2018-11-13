@@ -4,6 +4,7 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
+import android.app.SearchManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -144,12 +145,18 @@ setHasOptionsMenu(true);
 
         menu.clear();
 
-//        MenuItem search = menu.findItem(R.id.search_button);
-//
-//        if (search != null) {
-//            search.setVisible(false);
-//        }
         inflater.inflate(R.menu.menu_search, menu);
+
+//        SearchManager searchManager = (SearchManager)
+//                getSystemService(Context.SEARCH_SERVICE);
+//        searchMenuItem = menu.findItem(R.id.search);
+//        searchView = (SearchView) searchMenuItem.getActionView();
+//
+//        searchView.setSearchableInfo(searchManager.
+//                getSearchableInfo(getComponentName()));
+//        searchView.setSubmitButtonEnabled(true);
+//        searchView.setOnQueryTextListener(this);
+
     }
 
 

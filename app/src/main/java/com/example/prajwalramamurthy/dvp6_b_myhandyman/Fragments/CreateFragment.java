@@ -50,6 +50,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     private TextView date;
 
     private CreateFragmentListener myCreateListener;
+    private DatabaseReference mDatabase;
 
     public interface CreateFragmentListener
     {
@@ -110,13 +111,6 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
     }
 
-//    @Override
-//    public void onPrepareOptionsMenu(Menu menu)
-//    {
-//        menu.getItem(0).setEnabled(false);
-//        super.onPrepareOptionsMenu(menu);
-//    }
-
     @Override
     public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
     {
@@ -132,7 +126,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
         inflater.inflate(R.menu.menu_save, menu);
     }
 
-    private DatabaseReference mDatabase;
+
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item)
@@ -161,7 +155,6 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                     // add the new service order
                     ServiceOrder newSerOrder = new ServiceOrder(mTitle, mDesc, mLocation, mTime, dateStore);
 
-                    // TODO // do something with this
 
                     //mDatabase.child("users").child(FirebaseAuth.getInstance().getUid()).child("reviews").push().
                     mDatabase.child("orders").push().setValue(newSerOrder);
