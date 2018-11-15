@@ -6,5 +6,5 @@
         android:id="@+id/camera_button"
         android:icon="@drawable/ic_camera_white_24dp"
         android:title="Camera"
-        app:showAsAction="ifRoom" />
+        app:showAsAction="always" />
 </menu>

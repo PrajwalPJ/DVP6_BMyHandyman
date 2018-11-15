@@ -57,7 +57,7 @@ public class VerificationFragment extends Fragment
     {
         void getCameraResult();
         void saveVerifiedData();
-        void changeUI();
+        void uploadID();
     }
 
     VerificationFragmentListener myVerificationListener;
@@ -105,12 +105,14 @@ public class VerificationFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-                // then create a new intent
-                Intent intentCamera = new Intent(Intent.ACTION_PICK);
+//                // then create a new intent
+//                Intent intentCamera = new Intent(Intent.ACTION_PICK);
+//
+//                intentCamera.setType("image/jpeg");
+//                // start activity
+//                startActivityForResult(intentCamera, PICTURE_REQUEST);
 
-                intentCamera.setType("image/jpeg");
-                // start activity
-                startActivityForResult(intentCamera, PICTURE_REQUEST);
+                myVerificationListener.uploadID();
 
 
             }
@@ -179,7 +181,7 @@ public class VerificationFragment extends Fragment
 
     }
 
-    
+
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)

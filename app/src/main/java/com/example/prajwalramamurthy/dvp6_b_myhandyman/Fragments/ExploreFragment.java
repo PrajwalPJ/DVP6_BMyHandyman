@@ -185,6 +185,8 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public boolean onOptionsItemSelected(MenuItem item) {
+
+        setHasOptionsMenu(true);
         Integer itemId = item.getItemId();
 
 
@@ -200,7 +202,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
             break;
 
         }
-        return true;
+        return false;
     }
 }
 

@@ -14,25 +14,19 @@ import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.widget.FrameLayout;
-import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateHandymanFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ProfileFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.TabFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.VerificationFragment;
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.MainActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
-import com.google.android.gms.tasks.Task;
-import com.google.firebase.database.DatabaseReference;
-import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.storage.FirebaseStorage;
 import com.google.firebase.storage.StorageReference;
-import com.google.firebase.storage.UploadTask;
 
-import java.io.ByteArrayOutputStream;
-import java.util.Date;
+
+import java.io.IOException;
 import java.util.Objects;
 
 public class NavigationActivity extends AppCompatActivity implements ProfileFragment.ProfileFragmentLister ,
@@ -136,9 +130,20 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
         {
             Uri imageUri = data.getData();
 
-            Bitmap photo = (Bitmap) Objects.requireNonNull(Objects.requireNonNull(data).getExtras()).get("data");
+            Bitmap photo = null;
 
-            verificationFragment.displayImage(photo);
+            if (imageUri != null) {
+                try {
+                    photo = MediaStore.Images.Media.getBitmap(this.getContentResolver(), imageUri);
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } else {
+
+            photo = (Bitmap) Objects.requireNonNull(Objects.requireNonNull(data).getExtras()).get("data");}
+            if(photo != null) {
+                verificationFragment.displayImage(photo);
+            }
         }
     }
 
@@ -149,6 +154,14 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     {
         verificationFragment =  VerificationFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,verificationFragment,"VerificationFragment").commit();
+    }
+
+    @Override
+    public void launchLogin() {
+        // then create a new intent
+        Intent intent = new Intent(this, MainActivity.class);
+        //Start intent with Action_Image_Capture
+        startActivity(intent);
     }
 
     @Override
@@ -170,9 +183,17 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     }
 
     @Override
-    public void changeUI() {
+    public void uploadID()
+    {
+        // then create a new intent
+        Intent intentCamera = new Intent(Intent.ACTION_PICK);
+
+        intentCamera.setType("image/jpeg");
+        // start activity
+        startActivityForResult(intentCamera, PICTURE_REQUEST);
 
     }
+
 
 
     @Override

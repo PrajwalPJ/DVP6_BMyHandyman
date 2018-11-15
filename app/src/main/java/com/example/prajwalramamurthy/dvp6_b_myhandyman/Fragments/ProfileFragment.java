@@ -5,6 +5,7 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.content.Context;
+import android.content.Intent;
 import android.graphics.Color;
 import android.media.Image;
 import android.net.Uri;
@@ -44,6 +45,7 @@ public class ProfileFragment extends Fragment
     public  interface ProfileFragmentLister
     {
         void onVerifyButtonClick();
+        void launchLogin();
     }
 
     public static ProfileFragment newInstance()
@@ -113,6 +115,7 @@ public class ProfileFragment extends Fragment
             public void onClick(View v) {
 
                 FirebaseAuth.getInstance().signOut();
+                myProfileListener.launchLogin();
 
             }
         });
