@@ -140,16 +140,15 @@ public class MainActivity extends AppCompatActivity
                             FirebaseUser user = mAuth.getCurrentUser();
 
 
-                            Person person = new Person(Objects.requireNonNull(user).getDisplayName(),user.getEmail());
+                            Person person = new Person(Objects.requireNonNull(user).getDisplayName(),user.getEmail(),user.getPhotoUrl().toString());
 
                             DatabaseReference mDatabase;
 
+                            String phone = user.getPhoneNumber();
+
                             mDatabase = FirebaseDatabase.getInstance().getReference();
 
-                            if (user != null) {
-
-                                mDatabase.child("users").child(user.getUid()).setValue(person);
-                            }
+                            mDatabase.child("users").child(user.getUid()).setValue(person);
 
                             updateUI();
                         } else

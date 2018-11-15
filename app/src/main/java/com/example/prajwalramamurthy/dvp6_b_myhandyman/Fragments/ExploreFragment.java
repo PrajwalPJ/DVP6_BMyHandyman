@@ -4,6 +4,8 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
+import android.app.SearchManager;
+import android.content.Context;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -11,9 +13,11 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
+import android.widget.SearchView;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters.HandymanAdapter;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters.ServiceOrderAdapter;
@@ -29,8 +33,7 @@ import com.google.firebase.database.ValueEventListener;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ExploreFragment extends Fragment
-{
+public class ExploreFragment extends Fragment implements SearchView.OnQueryTextListener {
 
     private final ArrayList<ServiceOrder> orders = new ArrayList<>();
     private final ArrayList<Handyman> handymen = new ArrayList<>();
@@ -38,10 +41,24 @@ public class ExploreFragment extends Fragment
     private String selector;
     private HandymanAdapter handyManAdapter;
 
+    @Override
+    public boolean onQueryTextSubmit(String query) {
+        return false;
+    }
+
+    @Override
+    public boolean onQueryTextChange(String newText) {
+        //serviceOrderAdapter.get
+        return false;
+    }
+
+    public interface ExploreFragmentListener
+    {
+        void searchButtonClick();
+    }
+
     public static ExploreFragment newInstance(String selector)
     {
-
-
 
         ExploreFragment fragment = new ExploreFragment();
         fragment.selector = selector;
@@ -85,7 +102,7 @@ public class ExploreFragment extends Fragment
             }
         };
 
-        mDatabase.child(selector  == "orders"? "orders" : "handyman").addValueEventListener(postListener);
+        mDatabase.child(Objects.equals(selector, "orders") ? "orders" : "handyman").addValueEventListener(postListener);
 
     }
 
@@ -144,15 +161,50 @@ public class ExploreFragment extends Fragment
 
         inflater.inflate(R.menu.menu_search, menu);
 
-//        SearchManager searchManager = (SearchManager)
-//                getSystemService(Context.SEARCH_SERVICE);
-//        searchMenuItem = menu.findItem(R.id.search);
-//        searchView = (SearchView) searchMenuItem.getActionView();
+        SearchManager searchManager = (SearchManager)
+                getContext().getSystemService(Context.SEARCH_SERVICE);
+        MenuItem searchMenuItem = menu.findItem(R.id.search_button);
+        SearchView searchView = (SearchView) searchMenuItem.getActionView();
+
+        searchView.setSearchableInfo(searchManager.
+                getSearchableInfo(getActivity().getComponentName()));
+        searchView.setSubmitButtonEnabled(true);
+        searchView.setOnQueryTextListener(this);
+
+//        SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
+//        MenuItem searchMenuItem = menu.findItem(R.id.search_button);
+//        SearchView searchView = (SearchView) searchMenuItem.getActionView();
 //
-//        searchView.setSearchableInfo(searchManager.
-//                getSearchableInfo(getComponentName()));
+//
 //        searchView.setSubmitButtonEnabled(true);
-//        searchView.setOnQueryTextListener(this);
+//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
+//            @Override
+//            public boolean onQueryTextSubmit(String query) {
+//
+//
+//                String some = query;
+//
+//                return false;
+//            }
+//
+//            @Override
+//            public boolean onQueryTextChange(String newText) {
+//                return false;
+//            }
+//        });
+
+
+//        SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
+//        MenuItem searchMenuItem = menu.findItem(R.id.search_button);
+//        SearchView searchView = null;
+//
+//        if (searchMenuItem != null) {
+//            searchView = (SearchView) searchMenuItem.getActionView();
+//        }
+//        if (searchView != null) {
+//            searchView.setSearchableInfo(searchManager.getSearchableInfo(MainActivity.this.getComponentName()));
+//        }
+//        return super.onCreateOptionsMenu(menu);
 
     }
 

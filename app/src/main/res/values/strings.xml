@@ -4,10 +4,6 @@
     <string name="facebook_app_id">2193237877598639</string>
     <string name="fb_login_protocol_scheme">fb2193237877598639</string>
     <string name="terms_cond">By clicking on login, you are accepting our terms and conditions.</string>
-    <string name="construction">Construction</string>
-    <string name="mobile_development">Mobile Development</string>
-    <string name="skills">SKILLS</string>
-    <string name="prajwalr_com">prajwalr.com</string>
     <string name="exp_num">+1 972-214-8923</string>
     <string name="exp_email">prajwalramamurthy@yahoo.com</string>
     <string name="available">AVAILABLE</string>
@@ -19,8 +15,6 @@
     <string name="copyright">Copyright @ 2018 Prajwal Ramamurthy</string>
     <string name="todo">TODO</string>
     <string name="none">none</string>
-    <string name="search">Search</string>
-    <string name="map">Map</string>
     <string name="explore">Explore</string>
     <string name="create">Create</string>
     <string name="profile">Profile</string>
@@ -38,7 +32,6 @@
     <string name="not_verified">NOT VERIFIED</string>
 
     <!-- TODO: Remove or change this placeholder text -->
-    <string name="hello_blank_fragment">Hello blank fragment</string>
     <string name="list_a_handyman">List a handyman</string>
     <string name="bio">Bio</string>
     <string name="years_of_experience">Years of Experience</string>

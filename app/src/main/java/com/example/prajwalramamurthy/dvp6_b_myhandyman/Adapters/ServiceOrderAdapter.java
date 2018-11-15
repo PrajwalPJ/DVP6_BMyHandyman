@@ -5,6 +5,8 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
@@ -13,7 +15,7 @@ import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 import java.util.ArrayList;
 import java.util.Objects;
 
-public class ServiceOrderAdapter extends BaseAdapter
+public class ServiceOrderAdapter extends BaseAdapter implements Filterable
 {
 
     // BASE ID
@@ -93,6 +95,11 @@ public class ServiceOrderAdapter extends BaseAdapter
 
             return convertView;
         }
+        return null;
+    }
+
+    @Override
+    public Filter getFilter() {
         return null;
     }
 

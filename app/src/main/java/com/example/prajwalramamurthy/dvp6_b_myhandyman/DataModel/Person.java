@@ -4,7 +4,7 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel;
 
-import java.io.Serializable;
+
 
 public class Person
 {
@@ -15,6 +15,8 @@ public class Person
     public String mLastName;
     public String mEmail;
     public String mPhoneNumber;
+    public String id_img;
+    public String profile_img;
 
 
     public Person(){}
@@ -26,9 +28,11 @@ public class Person
         this.mPhoneNumber = mPhoneNumber;
     }
 
-    public Person(String mFirstName, String mEmail) {
+    public Person(String mFirstName, String mEmail,String image) {
         this.mFirstName = mFirstName;
         this.mEmail = mEmail;
+        this.profile_img = image
+                ;
     }
 
 }

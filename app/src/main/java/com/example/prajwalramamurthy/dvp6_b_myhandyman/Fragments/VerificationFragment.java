@@ -3,9 +3,11 @@ package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
+import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
+import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
@@ -22,10 +24,21 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
+import com.google.android.gms.tasks.Continuation;
+import com.google.android.gms.tasks.OnCompleteListener;
+import com.google.android.gms.tasks.OnFailureListener;
+import com.google.android.gms.tasks.OnSuccessListener;
+import com.google.android.gms.tasks.Task;
+import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.storage.FirebaseStorage;
+import com.google.firebase.storage.StorageReference;
+import com.google.firebase.storage.UploadTask;
 
-import java.util.ArrayList;
+import java.io.ByteArrayOutputStream;
+import java.io.IOException;
+import java.util.Date;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -33,12 +46,12 @@ import static android.app.Activity.RESULT_OK;
 public class VerificationFragment extends Fragment
 {
     private static final String POST = "POST";
-    private static final String ARG_URI = "ARG_URI";
+    //private static final String ARG_URI = "ARG_URI";
     private static final int PICTURE_REQUEST = 0x0101;
-    Button verifyButton;
     private ImageView photoViewImage;
+    private DatabaseReference mDatabase;
 
-    private ArrayList<Bitmap> myImageArrayList;
+    //private ArrayList<Bitmap> myImageArrayList;
 
     public interface VerificationFragmentListener
     {
@@ -65,9 +78,11 @@ public class VerificationFragment extends Fragment
 
 
 
-    public void displayImage( Bitmap imageUri )
+    public void displayImage( Bitmap bitmap )
     {
-        ( (ImageView) Objects.requireNonNull(getView()).findViewById(R.id.photoVIew)).setImageBitmap(imageUri);
+        if(getView() != null) {
+            ((ImageView) (getView()).findViewById(R.id.photoVIew)).setImageBitmap(bitmap);
+        }
     }
 
     @RequiresApi(api = Build.VERSION_CODES.M)
@@ -76,9 +91,10 @@ public class VerificationFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
+        mDatabase = FirebaseDatabase.getInstance().getReference();
 
         photoViewImage = view.findViewById(R.id.photoVIew);
+
         Button uploadImgButton = view.findViewById(R.id.uploadImageButton);
 
 
@@ -100,7 +116,7 @@ public class VerificationFragment extends Fragment
             }
         });
 
-        checkFilePermissions();
+        //checkFilePermissions();
 
         view.findViewById(R.id.saveVerifiyButton).setOnClickListener(new View.OnClickListener()
         {
@@ -112,19 +128,42 @@ public class VerificationFragment extends Fragment
                 {
                     Toast.makeText(getContext(), R.string.toast_id_saved, Toast.LENGTH_SHORT).show();
 
+                    final StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("IDImages");
+
+                    StorageReference imagesRef = storageRef.child(String.valueOf((new Date()).getTime()) + ".jpg");
+
+                    Bitmap bitmap = ((BitmapDrawable) photoViewImage.getDrawable()).getBitmap();
+                    ByteArrayOutputStream baos = new ByteArrayOutputStream();
+                    bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
+                    byte[] data = baos.toByteArray();
+
+                    UploadTask uploadTask = imagesRef.putBytes(data);
+
+
+                    uploadTask.addOnFailureListener(new OnFailureListener() {
+                        @Override
+                        public void onFailure(@NonNull Exception exception) {
+                            // Handle unsuccessful uploads
+                        }
+                    }).addOnSuccessListener(new OnSuccessListener<UploadTask.TaskSnapshot>() {
+                        @Override
+                        public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
+                            // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
+                            // ...
+
+                            Uri url = taskSnapshot.getDownloadUrl();
+
+                            String uid = FirebaseAuth.getInstance().getUid();
+
+                                DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
+
+                               DatabaseReference user = databaseReference.child("users").child(uid);
+
+                               user.child("id_img").setValue(url.toString());
 //
-//                    Bitmap bmp =  BitmapFactory.decodeResource(getResources(),R.drawable.chicken);//your image
-//                    ByteArrayOutputStream bYtE = new ByteArrayOutputStream();
-//                    bmp.compress(Bitmap.CompressFormat.PNG, 100, bYtE);
-//                    bmp.recycle();
-//                    byte[] byteArray = bYtE.toByteArray();
-//                    String encodedImage = Base64.encodeToString(byteArray, Base64.DEFAULT);
+                        }
+                    });
 
-//                    byte[] decodedString = Base64.decode(encodedImage, Base64.DEFAULT);
-//                    Bitmap decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.length);
-
-//                    verifyButton = profileFragment.verifyButton.findViewById(R.id.verifyButton);
-//                    verifyButton.setBackgroundColor(getResources().getColor(R.color.skyBlue ));
                     myVerificationListener.saveVerifiedData();
 
                 }
@@ -140,34 +179,44 @@ public class VerificationFragment extends Fragment
 
     }
 
-    private void addFilePaths()
-    {
 
-    }
-
-    @RequiresApi(api = Build.VERSION_CODES.M)
-    private void checkFilePermissions() {
-        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
-            int permissionCheck = Objects.requireNonNull(getContext()).checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
-            permissionCheck += Objects.requireNonNull(getContext()).checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
-            if (permissionCheck != 0) {
-                this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001); //Any number
-            }
-        }else{
-            Log.d("", "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
-        }
-    }
-
-    @Override
-    public void onActivityResult(int requestCode, int resultCode, Intent data)
-    {
-        super.onActivityResult(requestCode, resultCode, data);
-
-        if(resultCode == RESULT_OK && requestCode == PICTURE_REQUEST)
-        {
-            Uri imageUri = data.getData();
-            photoViewImage.setImageURI(imageUri);
-        }
+//
+//    @RequiresApi(api = Build.VERSION_CODES.M)
+//    private void checkFilePermissions() {
+//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
+//            int permissionCheck = Objects.requireNonNull(getContext()).checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
+//            permissionCheck += Objects.requireNonNull(getContext()).checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
+//            if (permissionCheck != 0) {
+//                this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001); //Any number
+//            }
+//        }else{
+//            Log.d("", "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
+//        }
+//    }
+//
+//    @Override
+//    public void onActivityResult(int requestCode, int resultCode, Intent data)
+//    {
+//        super.onActivityResult(requestCode, resultCode, data);
+//
+//        mDatabase.child("imageUrl").push();
+//
+//        if(resultCode == RESULT_OK && requestCode == PICTURE_REQUEST)
+//        {
+//            Uri imageUri = data.getData();
+//            photoViewImage.setImageURI(imageUri);
+//
+//            try
+//            {
+//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getContext()).getContentResolver(), imageUri);
+//                photoViewImage.setImageBitmap(bitmap);
+//
+//            }
+//            catch (IOException e)
+//            {
+//                e.printStackTrace();
+//            }
+//        }
 
 //        if (requestCode == RESULT_OK && resultCode == getActivity().RESULT_OK) {
 //            Bundle extras = data.getExtras();
@@ -175,7 +224,7 @@ public class VerificationFragment extends Fragment
 //            photoViewImage.setImageBitmap(imageBitmap);
 //            encodeBitmapAndSaveToFirebase(imageBitmap);
 //        }
-    }
+    //}
 
 //    public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
 //        ByteArrayOutputStream baos = new ByteArrayOutputStream();
