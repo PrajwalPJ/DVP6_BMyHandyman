@@ -137,7 +137,6 @@
             android:backgroundTint="@android:color/white"
             android:ems="10"
             android:hint="@string/time"
-            android:inputType="time"
             android:textColor="@android:color/white"
             android:textColorHint="@android:color/white"
             app:layout_constraintEnd_toEndOf="parent"

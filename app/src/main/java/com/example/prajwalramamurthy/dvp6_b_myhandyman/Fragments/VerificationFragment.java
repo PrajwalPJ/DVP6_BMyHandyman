@@ -1,6 +1,5 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
-import android.app.NativeActivity;
 import android.content.Context;
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -26,6 +25,7 @@ import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.ArrayList;
 import java.util.Objects;
 
 import static android.app.Activity.RESULT_OK;
@@ -36,11 +36,9 @@ public class VerificationFragment extends Fragment
     private static final String ARG_URI = "ARG_URI";
     private static final int PICTURE_REQUEST = 0x0101;
     Button verifyButton;
-    private Uri imageUri;
-    Button uploadImgButton;
     private ImageView photoViewImage;
 
-    private DatabaseReference mDatabase;
+    private ArrayList<Bitmap> myImageArrayList;
 
     public interface VerificationFragmentListener
     {
@@ -69,18 +67,19 @@ public class VerificationFragment extends Fragment
 
     public void displayImage( Bitmap imageUri )
     {
-        ( (ImageView) getView().findViewById(R.id.photoVIew)).setImageBitmap(imageUri);
+        ( (ImageView) Objects.requireNonNull(getView()).findViewById(R.id.photoVIew)).setImageBitmap(imageUri);
     }
 
+    @RequiresApi(api = Build.VERSION_CODES.M)
     @Override
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState)
     {
         super.onViewCreated(view, savedInstanceState);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         photoViewImage = view.findViewById(R.id.photoVIew);
-        uploadImgButton = view.findViewById(R.id.uploadImageButton);
+        Button uploadImgButton = view.findViewById(R.id.uploadImageButton);
 
 
 
@@ -101,6 +100,8 @@ public class VerificationFragment extends Fragment
             }
         });
 
+        checkFilePermissions();
+
         view.findViewById(R.id.saveVerifiyButton).setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -109,7 +110,7 @@ public class VerificationFragment extends Fragment
 
                 if(photoViewImage.getDrawable() != null)
                 {
-                    Toast.makeText(getContext(), "Photo was saved!", Toast.LENGTH_SHORT).show();
+                    Toast.makeText(getContext(), R.string.toast_id_saved, Toast.LENGTH_SHORT).show();
 
 //
 //                    Bitmap bmp =  BitmapFactory.decodeResource(getResources(),R.drawable.chicken);//your image
@@ -124,11 +125,23 @@ public class VerificationFragment extends Fragment
 
 //                    verifyButton = profileFragment.verifyButton.findViewById(R.id.verifyButton);
 //                    verifyButton.setBackgroundColor(getResources().getColor(R.color.skyBlue ));
+                    myVerificationListener.saveVerifiedData();
+
                 }
-                myVerificationListener.saveVerifiedData();
+                else
+                {
+                    Toast.makeText(getContext(), R.string.toast_id_not_saved, Toast.LENGTH_LONG).show();
+                    myVerificationListener.saveVerifiedData();
+                }
+
             }
         });
 
+
+    }
+
+    private void addFilePaths()
+    {
 
     }
 
@@ -152,10 +165,29 @@ public class VerificationFragment extends Fragment
 
         if(resultCode == RESULT_OK && requestCode == PICTURE_REQUEST)
         {
-            imageUri = data.getData();
+            Uri imageUri = data.getData();
             photoViewImage.setImageURI(imageUri);
         }
+
+//        if (requestCode == RESULT_OK && resultCode == getActivity().RESULT_OK) {
+//            Bundle extras = data.getExtras();
+//            Bitmap imageBitmap = (Bitmap) extras.get("data");
+//            photoViewImage.setImageBitmap(imageBitmap);
+//            encodeBitmapAndSaveToFirebase(imageBitmap);
+//        }
     }
+
+//    public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
+//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
+//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
+//        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
+//        DatabaseReference ref = FirebaseDatabase.getInstance()
+//                .getReference(Constants.IAP_PRODUCT_ID)
+//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
+//                //.child(// TODO .getPushId())
+//                .child("imageUrl");
+//        ref.setValue(imageEncoded);
+//    }
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)

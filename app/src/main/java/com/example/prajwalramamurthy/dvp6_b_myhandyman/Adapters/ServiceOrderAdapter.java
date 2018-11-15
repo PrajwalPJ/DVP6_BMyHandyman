@@ -80,16 +80,16 @@ public class ServiceOrderAdapter extends BaseAdapter
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        ServiceOrder p = (ServiceOrder) getItem(position);
+        ServiceOrder order = (ServiceOrder) getItem(position);
 
         // see if person is null
-        if(p != null)
+        if(order != null)
         {
-            viewHolder.title.setText(p.mTitle);
-            viewHolder.desc.setText(p.mDescription);
-            viewHolder.loc.setText(p.mLocation);
-            viewHolder.time.setText(p.mTime);
-//            viewHolder.date.setText(p.mDate);
+            viewHolder.title.setText(order.mTitle);
+            viewHolder.desc.setText(order.mDescription);
+            viewHolder.loc.setText(order.mLocation);
+            viewHolder.time.setText(order.mTime);
+            viewHolder.date.setText(order.mDate);
 
             return convertView;
         }

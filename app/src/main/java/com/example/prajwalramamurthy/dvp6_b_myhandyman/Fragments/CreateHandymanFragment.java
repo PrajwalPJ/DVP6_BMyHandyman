@@ -20,6 +20,8 @@ import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import java.util.Objects;
+
 public class CreateHandymanFragment extends Fragment
 {
     private EditText  mTitle;
@@ -96,8 +98,8 @@ public class CreateHandymanFragment extends Fragment
                     String bio = mBio.getText().toString();
                     String location = mLocation.getText().toString();
                     String avil = mAvailability.getText().toString();
-                    Integer years = Integer.parseInt(mYearsExp.getText().toString());
-                    Integer rate = Integer.parseInt(mHourRate.getText().toString());
+                    String years = mYearsExp.getText().toString();
+                    String rate = mHourRate.getText().toString();
 
 
                     // add the new service order
@@ -123,7 +125,7 @@ public class CreateHandymanFragment extends Fragment
 
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
-        TextView createServiceOrder = getView().findViewById(R.id.createServiceOrderLink);
+        TextView createServiceOrder = Objects.requireNonNull(getView()).findViewById(R.id.createServiceOrderLink);
 
         createServiceOrder.setOnClickListener(new View.OnClickListener()
         {

@@ -1,7 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
-    xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
@@ -17,9 +16,60 @@
         app:srcCompat="@drawable/wall_three_copy" />
 
     <TextView
-        android:id="@+id/titleOrderView"
-        android:layout_width="240dp"
+        android:id="@+id/textView7"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Years Exp"
+        app:layout_constraintEnd_toStartOf="@+id/titleHand"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView6" />
+
+    <TextView
+        android:id="@+id/textView9"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="Hour Rate"
+        app:layout_constraintEnd_toStartOf="@+id/titleHand"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView7" />
+
+    <TextView
+        android:id="@+id/textView12"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="8dp"
+        android:layout_marginEnd="8dp"
+        android:text="@string/bio"
+        app:layout_constraintEnd_toStartOf="@+id/titleHand"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toBottomOf="@+id/textView9" />
+
+    <TextView
+        android:id="@+id/textView5"
+        android:layout_width="0dp"
         android:layout_height="18dp"
+        android:layout_marginEnd="8dp"
+        android:layout_marginBottom="8dp"
+        android:text="@string/ratingsss"
+        android:textAlignment="center"
+        android:textSize="20sp"
+        android:textColor="@color/baige"
+        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
+        app:layout_constraintEnd_toStartOf="@+id/guideline"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imageView5" />
+
+    <TextView
+        android:id="@+id/titleHand"
+        android:layout_width="212dp"
+        android:layout_height="19dp"
         android:layout_alignTop="@+id/imageView6"
         android:layout_alignEnd="@+id/imageView6"
         android:layout_alignParentStart="true"
@@ -29,36 +79,33 @@
         android:textColor="@android:color/white"
         android:textColorHint="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/guideline"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
-        android:id="@+id/descOrderView"
+        android:id="@+id/yearsHand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/titleOrderView"
+        android:layout_below="@+id/titleHand"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="8dp"
-        android:text="@string/description"
+        android:text="@string/years_of_experience"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/titleOrderView"
-        app:layout_constraintTop_toBottomOf="@+id/titleOrderView" />
+        app:layout_constraintStart_toStartOf="@+id/titleHand"
+        app:layout_constraintTop_toBottomOf="@+id/titleHand" />
 
     <ImageView
         android:id="@+id/imageView5"
-        android:layout_width="89dp"
-        android:layout_height="135dp"
+        android:layout_width="85dp"
+        android:layout_height="112dp"
         android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        app:layout_constraintBottom_toBottomOf="@+id/imageView6"
         app:layout_constraintEnd_toStartOf="@+id/guideline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintVertical_bias="1.0"
-        app:srcCompat="@drawable/profile_pic" />
+        app:srcCompat="@drawable/profile_pic"
+        android:contentDescription="@string/none"/>
 
     <android.support.constraint.Guideline
         android:id="@+id/guideline"
@@ -68,47 +115,47 @@
         app:layout_constraintGuide_percent="0.3" />
 
     <TextView
-        android:id="@+id/locOrderView"
+        android:id="@+id/rateHand"
         android:layout_width="0dp"
         android:layout_height="18dp"
-        android:layout_below="@+id/descOrderView"
+        android:layout_below="@+id/yearsHand"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="6dp"
-        android:text="@string/location"
+        android:text="@string/rate_per_hour"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/titleOrderView"
-        app:layout_constraintTop_toBottomOf="@+id/descOrderView" />
+        app:layout_constraintStart_toStartOf="@+id/titleHand"
+        app:layout_constraintTop_toBottomOf="@+id/yearsHand" />
 
     <TextView
-        android:id="@+id/timeOrderView"
+        android:id="@+id/bioHand"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/locOrderView"
+        android:layout_below="@+id/rateHand"
         android:layout_alignParentStart="true"
         android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
         android:layout_marginEnd="6dp"
-        android:text="@string/time"
+        android:lines="3"
+        android:text="@string/bio"
         android:textColor="@android:color/white"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/descOrderView"
-        app:layout_constraintTop_toBottomOf="@+id/locOrderView" />
+        app:layout_constraintHorizontal_bias="1.0"
+        app:layout_constraintStart_toStartOf="@+id/yearsHand"
+        app:layout_constraintTop_toBottomOf="@+id/rateHand" />
 
     <TextView
-        android:id="@+id/dateOrderView"
-        android:layout_width="0dp"
+        android:id="@+id/textView6"
+        android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_below="@+id/timeOrderView"
-        android:layout_alignParentStart="true"
-        android:layout_alignParentEnd="true"
         android:layout_marginTop="8dp"
-        android:layout_marginEnd="6dp"
-        android:text="@string/date"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="@+id/titleOrderView"
-        app:layout_constraintTop_toBottomOf="@+id/timeOrderView" />
+        android:layout_marginEnd="8dp"
+        android:text="@string/title"
+        app:layout_constraintEnd_toStartOf="@+id/titleHand"
+        app:layout_constraintHorizontal_bias="0.0"
+        app:layout_constraintStart_toStartOf="@+id/guideline"
+        app:layout_constraintTop_toTopOf="parent" />
+
 </android.support.constraint.ConstraintLayout>

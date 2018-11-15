@@ -27,7 +27,6 @@ import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
-import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
@@ -35,9 +34,6 @@ import java.text.FieldPosition;
 import java.text.SimpleDateFormat;
 import java.util.Calendar;
 import java.util.Objects;
-import java.util.TimeZone;
-
-import static com.facebook.share.internal.DeviceShareDialogFragment.TAG;
 
 public class CreateFragment extends Fragment implements DatePickerDialog.OnDateSetListener
 {
@@ -51,6 +47,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
     private CreateFragmentListener myCreateListener;
     private DatabaseReference mDatabase;
+
 
     public interface CreateFragmentListener
     {
@@ -87,7 +84,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     @Override
     public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
     {
-        setHasOptionsMenu(true);
+
         return inflater.inflate(R.layout.fragment_create, container, false);
     }
 
@@ -150,7 +147,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                     String mDesc = desc.getText().toString();
                     String mLocation = location.getText().toString();
                     String mTime = time.getText().toString();
-                    String dateStore = date.toString();
+                    String dateStore = date.getText().toString();
 
                     // add the new service order
                     ServiceOrder newSerOrder = new ServiceOrder(mTitle, mDesc, mLocation, mTime, dateStore);
@@ -160,6 +157,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
                     mDatabase.child("orders").push().setValue(newSerOrder);
                     // show toast for confirmation
                     Toast.makeText(getContext(), R.string.created_order_toast, Toast.LENGTH_LONG).show();
+
 
                 }
         return true;

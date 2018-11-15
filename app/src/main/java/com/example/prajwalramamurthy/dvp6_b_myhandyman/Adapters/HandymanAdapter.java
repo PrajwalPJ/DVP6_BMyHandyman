@@ -8,7 +8,6 @@ import android.widget.BaseAdapter;
 import android.widget.TextView;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.Handyman;
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
 import java.util.ArrayList;
@@ -24,21 +23,21 @@ public class HandymanAdapter extends BaseAdapter
     private final Context mContext;
 
     // Reference to our collection
-    private final ArrayList<Handyman> myServiceOrders;
+    private final ArrayList<Handyman> myHandymen;
 
     public HandymanAdapter(Context mContext, ArrayList<Handyman> myServiceOrders)
     {
         this.mContext = mContext;
-        this.myServiceOrders = myServiceOrders;
+        this.myHandymen = myServiceOrders;
     }
 
     // get size
     @Override
     public int getCount()
     {
-        if (myServiceOrders != null)
+        if (myHandymen != null)
         {
-            return myServiceOrders.size();
+            return myHandymen.size();
         }
         return 0;
     }
@@ -48,8 +47,8 @@ public class HandymanAdapter extends BaseAdapter
     public Object getItem(int position)
     {
 
-        if (myServiceOrders != null && position >= 0 || position < Objects.requireNonNull(myServiceOrders).size()) {
-            return myServiceOrders.get(position);
+        if (myHandymen != null && position >= 0 || position < Objects.requireNonNull(myHandymen).size()) {
+            return myHandymen.get(position);
         }
 
         return null;
@@ -81,27 +80,40 @@ public class HandymanAdapter extends BaseAdapter
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        Handyman p = (Handyman) getItem(position);
+        Handyman item = (Handyman) getItem(position);
 
         // see if person is null
-        if(p != null)
+        if(item != null)
         {
-//            viewHolder.tv_fullName.setText(p.mTitle);
+            viewHolder.title.setText(item.mTitle);
+            viewHolder.bio.setText(item.mBio);
+          viewHolder.rate.setText(item.mHourRate);
+          viewHolder.yearsEx.setText(item.mYearsExp);
+
+
 
             return convertView;
         }
         return null;
     }
 
+
     // Optimize with view holder!
     static class ViewHolder
     {
-//        final TextView tv_fullName;
+        final TextView title;
+        final TextView yearsEx;
+        final TextView rate;
+        final TextView bio;
 
 
         ViewHolder(View layout)
         {
-//            tv_fullName = layout.findViewById(R.id.titleViewAdapter);
+            title = layout.findViewById(R.id.titleHand);
+            yearsEx = layout.findViewById(R.id.yearsHand);
+            rate = layout.findViewById(R.id.rateHand);
+            bio = layout.findViewById(R.id.bioHand);
+
 
         }
     }

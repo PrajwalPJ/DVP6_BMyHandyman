@@ -12,7 +12,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.Button;
@@ -24,7 +23,6 @@ public class ProfileFragment extends Fragment
 {
 
     private ProfileFragmentLister myProfileListener;
-    private Button verifyButton;
 
     public  interface ProfileFragmentLister
     {
@@ -61,7 +59,7 @@ public class ProfileFragment extends Fragment
 
         menu.clear();
 
-        inflater.inflate(R.menu.menu_edit, menu);
+        //inflater.inflate(R.menu.menu_edit, menu);
     }
 
 
@@ -79,7 +77,7 @@ public class ProfileFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        verifyButton = view.findViewById(R.id.verifyButton);
+        Button verifyButton = view.findViewById(R.id.verifyButton);
 
 
         verifyButton.setOnClickListener(new View.OnClickListener()

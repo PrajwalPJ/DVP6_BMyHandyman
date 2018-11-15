@@ -1,15 +1,12 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
-import android.app.Activity;
+import android.support.annotation.NonNull;
 import android.support.v4.app.Fragment;
 import android.content.Context;
-import android.net.Uri;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.design.widget.TabLayout;
 import android.support.v4.view.ViewPager;
-import android.support.v7.app.AppCompatActivity;
-import android.support.v7.widget.Toolbar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -18,10 +15,10 @@ import android.view.ViewGroup;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters.PagerAdapter;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
+import java.util.Objects;
+
 
 public class TabFragment extends Fragment {
-
-    private Context context;
 
     public TabFragment() {
         // Required empty public constructor
@@ -29,9 +26,8 @@ public class TabFragment extends Fragment {
 
 
     public static TabFragment newInstance() {
-        TabFragment fragment = new TabFragment();
 
-        return fragment;
+        return new TabFragment();
     }
 
     @Override
@@ -40,8 +36,9 @@ public class TabFragment extends Fragment {
 
     }
 
+    @SuppressWarnings("deprecation")
     @Override
-    public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {
+    public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
 
@@ -52,7 +49,7 @@ public class TabFragment extends Fragment {
 
         final ViewPager viewPager =  view.findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
-                (getActivity().getSupportFragmentManager(), tabLayout.getTabCount());
+                (Objects.requireNonNull(getActivity()).getSupportFragmentManager(), tabLayout.getTabCount());
         viewPager.setAdapter(adapter);
         viewPager.addOnPageChangeListener(new TabLayout.TabLayoutOnPageChangeListener(tabLayout));
         tabLayout.setOnTabSelectedListener(new TabLayout.OnTabSelectedListener() {
@@ -85,7 +82,6 @@ public class TabFragment extends Fragment {
     @Override
     public void onAttach(Context context) {
         super.onAttach(context);
-        this.context = context;
     }
 
 

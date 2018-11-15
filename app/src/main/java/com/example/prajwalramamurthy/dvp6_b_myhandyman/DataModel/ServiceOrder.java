@@ -3,7 +3,7 @@ package com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel;
 public class ServiceOrder {
 
     // member variables
-    public int mId;
+    //private int mId;
     public String mTitle;
     public String mDescription;
     public String mLocation;
@@ -19,13 +19,13 @@ public class ServiceOrder {
         this.mTime = mTime;
         this.mDate = mDate;
     }
-
-    public ServiceOrder(int mId, String mTitle, String mDescription, String mLocation, String mTime, String mDate) {
-        this.mId = mId;
-        this.mTitle = mTitle;
-        this.mDescription = mDescription;
-        this.mLocation = mLocation;
-        this.mTime = mTime;
-        this.mDate = mDate;
-    }
+//
+//    public ServiceOrder(int mId, String mTitle, String mDescription, String mLocation, String mTime, String mDate) {
+//        this.mId = mId;
+//        this.mTitle = mTitle;
+//        this.mDescription = mDescription;
+//        this.mLocation = mLocation;
+//        this.mTime = mTime;
+//        this.mDate = mDate;
+//    }
 }

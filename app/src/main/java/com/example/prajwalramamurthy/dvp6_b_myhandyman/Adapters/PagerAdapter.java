@@ -7,7 +7,7 @@ import android.support.v4.app.FragmentStatePagerAdapter;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.ExploreFragment;
 
 public class PagerAdapter extends FragmentStatePagerAdapter {
-    int mNumOfTabs;
+    private final int mNumOfTabs;
 
     public PagerAdapter(FragmentManager fm, int NumOfTabs) {
         super(fm);
@@ -19,11 +19,9 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
 
         switch (position) {
             case 0:
-                ExploreFragment ServiceOrder = ExploreFragment.newInstance("orders");
-                return ServiceOrder;
+                return ExploreFragment.newInstance("orders");
             case 1:
-                ExploreFragment Handyman = ExploreFragment.newInstance("handyman");
-                return Handyman;
+                return ExploreFragment.newInstance("handyman");
             default:
                 return null;
         }

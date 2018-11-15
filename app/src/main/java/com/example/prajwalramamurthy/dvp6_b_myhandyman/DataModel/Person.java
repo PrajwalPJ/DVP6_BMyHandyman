@@ -8,11 +8,11 @@ public class Person
 {
 
     // member variables
-    public int mId;
-    public String mFirstName;
-    public String mLastName;
-    public String mEmail;
-    public String mPhoneNumber;
+    private int mId;
+    private String mFirstName;
+    private String mLastName;
+    private String mEmail;
+    private String mPhoneNumber;
 
 
     public Person(){}
@@ -29,11 +29,4 @@ public class Person
         this.mEmail = mEmail;
     }
 
-    public Person(int mId, String mFirstName, String mLastName, String mEmail, String mPhoneNumber) {
-        this.mId = mId;
-        this.mFirstName = mFirstName;
-        this.mLastName = mLastName;
-        this.mEmail = mEmail;
-        this.mPhoneNumber = mPhoneNumber;
-    }
 }

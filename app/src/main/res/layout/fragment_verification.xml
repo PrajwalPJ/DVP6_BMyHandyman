@@ -1,54 +1,62 @@
 <?xml version="1.0" encoding="utf-8"?>
-<android.support.constraint.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
-    <TextView
-        android:id="@+id/textView"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
-        android:text="@string/upload_or_take_an_image_to_verify_documentation"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+    <android.support.constraint.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent">
 
-    <Button
-        android:id="@+id/uploadImageButton"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:text="@string/upload_id"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        app:layout_constraintEnd_toEndOf="@+id/photoVIew"
-        app:layout_constraintStart_toStartOf="@+id/photoVIew"
-        app:layout_constraintTop_toBottomOf="@+id/textView" />
 
-    <ImageView
-        android:id="@+id/photoVIew"
-        android:layout_width="256dp"
-        android:layout_height="340dp"
-        android:layout_marginTop="8dp"
-        android:background="@color/transp_brown"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/uploadImageButton"
-        android:contentDescription="@string/none" />
+        <TextView
+            android:id="@+id/textView"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:text="@string/upload_or_take_an_image_to_verify_documentation"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toTopOf="parent" />
 
-    <Button
-        android:id="@+id/saveVerifiyButton"
-        android:layout_width="0dp"
-        android:layout_height="40dp"
-        android:layout_marginTop="8dp"
-        android:layout_marginBottom="8dp"
-        android:text="@string/save"
-        android:backgroundTint="@color/colorPrimary"
-        android:textColor="@android:color/white"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintEnd_toEndOf="@+id/photoVIew"
-        app:layout_constraintStart_toStartOf="@+id/photoVIew"
-        app:layout_constraintTop_toBottomOf="@+id/photoVIew" />
-</android.support.constraint.ConstraintLayout>
+        <Button
+            android:id="@+id/uploadImageButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="8dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/upload_id"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/photoVIew"
+            app:layout_constraintStart_toStartOf="@+id/photoVIew"
+            app:layout_constraintTop_toBottomOf="@+id/textView" />
+
+        <ImageView
+            android:id="@+id/photoVIew"
+            android:layout_width="374dp"
+            android:layout_height="358dp"
+            android:layout_marginStart="8dp"
+            android:layout_marginTop="8dp"
+            android:layout_marginEnd="8dp"
+            android:background="@color/red_trans"
+            android:contentDescription="@string/none"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintTop_toBottomOf="@+id/uploadImageButton" />
+
+        <Button
+            android:id="@+id/saveVerifiyButton"
+            android:layout_width="0dp"
+            android:layout_height="40dp"
+            android:layout_marginTop="16dp"
+            android:backgroundTint="@color/colorPrimary"
+            android:text="@string/save"
+            android:textColor="@android:color/white"
+            app:layout_constraintEnd_toEndOf="@+id/photoVIew"
+            app:layout_constraintStart_toStartOf="@+id/photoVIew"
+            app:layout_constraintTop_toBottomOf="@+id/photoVIew" />
+
+    </android.support.constraint.ConstraintLayout>
+
+</FrameLayout>

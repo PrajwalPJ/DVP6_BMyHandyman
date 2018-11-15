@@ -4,7 +4,6 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
-import android.app.SearchManager;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -12,7 +11,6 @@ import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
-import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
@@ -29,6 +27,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
 
 import java.util.ArrayList;
+import java.util.Objects;
 
 public class ExploreFragment extends Fragment
 {
@@ -36,7 +35,6 @@ public class ExploreFragment extends Fragment
     private final ArrayList<ServiceOrder> orders = new ArrayList<>();
     private final ArrayList<Handyman> handymen = new ArrayList<>();
     private ServiceOrderAdapter serviceOrderAdapter;
-    private ListView myListView;
     private String selector;
     private HandymanAdapter handyManAdapter;
 
@@ -63,16 +61,15 @@ public class ExploreFragment extends Fragment
                 // Get Post object and use the values to update the UI
                 for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
 
-                    if(selector == "orders") {
+                    if(Objects.equals(selector, "orders")) {
                         ServiceOrder order = postSnapshot.getValue(ServiceOrder.class);
                         orders.add(order);
                     } else {
-                        Handyman order = postSnapshot.getValue(Handyman.class);
-                        handymen.add(order);
+                        Handyman hand = postSnapshot.getValue(Handyman.class);
+                        handymen.add(hand);
                     }
 
                     // notify that its changed and refresh the database
-
 
                     serviceOrderAdapter.notifyDataSetChanged();
                     handyManAdapter.notifyDataSetChanged();
@@ -100,12 +97,12 @@ public class ExploreFragment extends Fragment
         serviceOrderAdapter = new ServiceOrderAdapter(getContext(), orders);
         handyManAdapter = new HandymanAdapter(getContext(), handymen);
 
-        myListView = view.findViewById(R.id.myListView);
+        ListView myListView = view.findViewById(R.id.myListView);
 
 
         if (selector  == "orders") {
             myListView.setAdapter(serviceOrderAdapter);
-        } else {
+        } else if(selector  == "handyman") {
             myListView.setAdapter(handyManAdapter);
         }
 
@@ -118,7 +115,7 @@ public class ExploreFragment extends Fragment
         super.onCreate(savedInstanceState);
 
 
-setHasOptionsMenu(true);
+        setHasOptionsMenu(true);
 
 
     }
