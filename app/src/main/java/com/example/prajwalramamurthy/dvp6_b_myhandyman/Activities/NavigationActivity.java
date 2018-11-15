@@ -13,7 +13,6 @@ import android.support.design.widget.BottomNavigationView;
 import android.support.v7.app.AppCompatActivity;
 import android.view.Menu;
 import android.view.MenuItem;
-import android.widget.FrameLayout;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.CreateHandymanFragment;
@@ -22,8 +21,6 @@ import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.TabFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments.VerificationFragment;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.MainActivity;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
-import com.google.firebase.storage.FirebaseStorage;
-import com.google.firebase.storage.StorageReference;
 
 
 import java.io.IOException;
@@ -51,7 +48,6 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
         setContentView(R.layout.bottom_navigation);
 
         // initialize my bottom navigation bar and my frame layout
-        FrameLayout myMainFrame = findViewById(R.id.main_frame_layout);
         myBottomNavBar = findViewById(R.id.main_navigation_bar);
 
 
@@ -123,12 +119,9 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     {
         super.onActivityResult(requestCode, resultCode, data);
 
-        //DatabaseReference mPostDatabaseRef = FirebaseDatabase.getInstance().getReference("users");
-        StorageReference mStorageRef = FirebaseStorage.getInstance().getReference();
-
         if(requestCode == PICTURE_REQUEST)
         {
-            Uri imageUri = data.getData();
+            Uri imageUri = Objects.requireNonNull(data).getData();
 
             Bitmap photo = null;
 

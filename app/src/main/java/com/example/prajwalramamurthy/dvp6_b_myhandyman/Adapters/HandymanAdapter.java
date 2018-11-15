@@ -10,7 +10,6 @@ import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.Handyman;
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
 import java.util.ArrayList;
@@ -19,6 +18,8 @@ import java.util.Objects;
 
 public class HandymanAdapter extends BaseAdapter implements Filterable
 {
+
+
 
     // BASE ID
     private static final long BASE_ID = 0x01001;
@@ -104,7 +105,7 @@ public class HandymanAdapter extends BaseAdapter implements Filterable
 
     public List<Handyman> filteredData = null;
 
-    ItemFilter filter = new ItemFilter();
+    private final ItemFilter filter = new ItemFilter();
 
     @Override
     public Filter getFilter() {
@@ -122,7 +123,7 @@ public class HandymanAdapter extends BaseAdapter implements Filterable
             final List<Handyman> list = myHandymen;
 
             int count = list.size();
-            final ArrayList<Handyman> nlist = new ArrayList<Handyman>(count);
+            final ArrayList<Handyman> nlist = new ArrayList<>(count);
 
             Handyman filterableString ;
 

@@ -9,7 +9,6 @@ import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
-import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
@@ -114,7 +113,7 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
         return null;
     }
 
-    private ItemFilter mFilter = new ItemFilter();
+    private final ItemFilter mFilter = new ItemFilter();
 
     @Override
     public Filter getFilter() {
@@ -134,7 +133,7 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
             final List<ServiceOrder> list = myServiceOrders;
 
             int count = list.size();
-            final ArrayList<ServiceOrder> nlist = new ArrayList<ServiceOrder>(count);
+            final ArrayList<ServiceOrder> nlist = new ArrayList<>(count);
 
             ServiceOrder filterableString ;
 

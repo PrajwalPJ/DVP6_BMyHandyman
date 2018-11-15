@@ -44,6 +44,8 @@
     <string name="toast_id_saved">Success! ID was saved!</string>
     <string name="toast_id_not_saved">Oops! There was no ID. Verification is not Complete.</string>
     <string name="fb_auth_fail_toast">Authentication failed.</string>
+    <string name="toast_network">No Network. Please check the device network connection and relaunch the app.</string>
+    <string name="network_connected_toast">Network Connected!</string>
 
 
 </resources>

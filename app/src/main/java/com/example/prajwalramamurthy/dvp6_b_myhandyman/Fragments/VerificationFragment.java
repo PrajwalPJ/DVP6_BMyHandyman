@@ -1,18 +1,15 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
 import android.graphics.Bitmap;
 import android.graphics.drawable.BitmapDrawable;
 import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
-import android.provider.MediaStore;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.annotation.RequiresApi;
 import android.support.v4.app.Fragment;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.Menu;
 import android.view.MenuInflater;
@@ -24,11 +21,8 @@ import android.widget.ImageView;
 import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
-import com.google.android.gms.tasks.Continuation;
-import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.OnFailureListener;
 import com.google.android.gms.tasks.OnSuccessListener;
-import com.google.android.gms.tasks.Task;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
@@ -37,11 +31,8 @@ import com.google.firebase.storage.StorageReference;
 import com.google.firebase.storage.UploadTask;
 
 import java.io.ByteArrayOutputStream;
-import java.io.IOException;
 import java.util.Date;
 import java.util.Objects;
-
-import static android.app.Activity.RESULT_OK;
 
 public class VerificationFragment extends Fragment
 {
@@ -49,7 +40,6 @@ public class VerificationFragment extends Fragment
     //private static final String ARG_URI = "ARG_URI";
     private static final int PICTURE_REQUEST = 0x0101;
     private ImageView photoViewImage;
-    private DatabaseReference mDatabase;
 
     //private ArrayList<Bitmap> myImageArrayList;
 
@@ -60,7 +50,7 @@ public class VerificationFragment extends Fragment
         void uploadID();
     }
 
-    VerificationFragmentListener myVerificationListener;
+    private VerificationFragmentListener myVerificationListener;
 
     public static VerificationFragment newInstance()
     {
@@ -91,7 +81,7 @@ public class VerificationFragment extends Fragment
     {
         super.onViewCreated(view, savedInstanceState);
 
-        mDatabase = FirebaseDatabase.getInstance().getReference();
+        DatabaseReference mDatabase = FirebaseDatabase.getInstance().getReference();
 
         photoViewImage = view.findViewById(R.id.photoVIew);
 
@@ -105,12 +95,6 @@ public class VerificationFragment extends Fragment
             @Override
             public void onClick(View v)
             {
-//                // then create a new intent
-//                Intent intentCamera = new Intent(Intent.ACTION_PICK);
-//
-//                intentCamera.setType("image/jpeg");
-//                // start activity
-//                startActivityForResult(intentCamera, PICTURE_REQUEST);
 
                 myVerificationListener.uploadID();
 
@@ -118,7 +102,6 @@ public class VerificationFragment extends Fragment
             }
         });
 
-        //checkFilePermissions();
 
         view.findViewById(R.id.saveVerifiyButton).setOnClickListener(new View.OnClickListener()
         {
@@ -159,9 +142,9 @@ public class VerificationFragment extends Fragment
 
                                 DatabaseReference databaseReference = FirebaseDatabase.getInstance().getReference();
 
-                               DatabaseReference user = databaseReference.child("users").child(uid);
+                               DatabaseReference user = databaseReference.child("users").child(Objects.requireNonNull(uid));
 
-                               user.child("id_img").setValue(url.toString());
+                               user.child("id_img").setValue(Objects.requireNonNull(url).toString());
 //
                         }
                     });

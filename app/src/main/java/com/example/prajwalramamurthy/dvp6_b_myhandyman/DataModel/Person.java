@@ -12,9 +12,8 @@ public class Person
     // member variables
     public int mId;
     public String mFirstName;
-    public String mLastName;
+    private String mLastName;
     public String mEmail;
-    public String mPhoneNumber;
     public String id_img;
     public String profile_img;
 
@@ -25,7 +24,7 @@ public class Person
         this.mFirstName = mFirstName;
         this.mLastName = mLastName;
         this.mEmail = mEmail;
-        this.mPhoneNumber = mPhoneNumber;
+        String mPhoneNumber1 = mPhoneNumber;
     }
 
     public Person(String mFirstName, String mEmail,String image) {

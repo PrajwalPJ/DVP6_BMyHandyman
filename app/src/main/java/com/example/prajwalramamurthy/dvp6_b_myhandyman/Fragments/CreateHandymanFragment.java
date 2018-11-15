@@ -96,14 +96,14 @@ public class CreateHandymanFragment extends Fragment
                     // catch and store the user input and pass it to our data model
                     String title = mTitle.getText().toString();
                     String bio = mBio.getText().toString();
-                    String location = mLocation.getText().toString();
+//                    String location = mLocation.getText().toString();
                     String avil = mAvailability.getText().toString();
                     String years = mYearsExp.getText().toString();
                     String rate = mHourRate.getText().toString();
 
 
                     // add the new service order
-                    Handyman handyman = new Handyman(title, bio, location, avil, years, rate);
+                    Handyman handyman = new Handyman(title, bio, avil, years, rate);
 
 
                     mDatabase.child("handyman").push().setValue(handyman);

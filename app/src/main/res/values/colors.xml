@@ -2,11 +2,19 @@
 <resources>
     <color name="colorPrimary">#8E3135</color>
     <color name="colorPrimaryDark">#210F24</color>
-    <color name="colorAccent">#4dbe0d</color>
+    <color name="colorAccent">#ce4269</color>
 
     <color name="red_trans">#6e8e3135</color>
 
     <color name="skyBlue">#87CEEB</color>
 
     <color name="baige">#FFA833</color>
+
+    <color name="green">#4dbe0d</color>
+
+    <color name="red">#e60c29</color>
+
+    <color name="white">#ffffff</color>
+
+
 </resources>

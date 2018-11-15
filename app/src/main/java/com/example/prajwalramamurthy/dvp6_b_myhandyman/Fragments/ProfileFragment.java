@@ -5,10 +5,6 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.content.Context;
-import android.content.Intent;
-import android.graphics.Color;
-import android.media.Image;
-import android.net.Uri;
 import android.os.Build;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
@@ -23,9 +19,7 @@ import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.Handyman;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.Person;
-import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
@@ -91,7 +85,7 @@ public class ProfileFragment extends Fragment
         myProfileListener = (ProfileFragmentLister) context;
     }
 
-    Person person;
+    private Person person;
 
     @Override
     public void onViewCreated(@NonNull final View view, @Nullable Bundle savedInstanceState)
@@ -130,8 +124,8 @@ public class ProfileFragment extends Fragment
                 person = dataSnapshot.getValue(Person.class);
 
 
-                if(person.profile_img !=null) {
-                   ImageView profile_img = ((ImageView) view.findViewById(R.id.profile_pic));
+                if(Objects.requireNonNull(person).profile_img !=null) {
+                   ImageView profile_img = view.findViewById(R.id.profile_pic);
                    Picasso.get().load(person
                    .profile_img).into(profile_img);
                 }
@@ -151,12 +145,10 @@ public class ProfileFragment extends Fragment
                 if(person.id_img != null) {
 
                     if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
-                        verifyButton.setBackgroundColor(getResources().getColor(R.color.colorAccent, null));
+                        verifyButton.setBackgroundColor(getResources().getColor(R.color.green, null));
                         verifyButton.setText("VERIFIED");
                         verifyButton.setClickable(false);
                     }
-                } else {
-
                 }
             }
 

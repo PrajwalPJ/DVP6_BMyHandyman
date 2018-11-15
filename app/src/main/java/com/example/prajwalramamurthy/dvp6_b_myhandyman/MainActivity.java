@@ -4,11 +4,20 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman;
 
+import android.content.BroadcastReceiver;
+import android.content.Context;
 import android.content.Intent;
+import android.content.IntentFilter;
+import android.graphics.Color;
+import android.net.ConnectivityManager;
+import android.net.NetworkInfo;
+import android.os.Build;
 import android.support.annotation.NonNull;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
+import android.view.View;
+import android.widget.TextView;
 import android.widget.Toast;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities.NavigationActivity;
@@ -29,70 +38,78 @@ import com.google.firebase.auth.FirebaseUser;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 
+import org.w3c.dom.Text;
+
 import java.util.Arrays;
+import java.util.HashSet;
 import java.util.Objects;
+import java.util.Set;
 
 
-public class MainActivity extends AppCompatActivity
+public class MainActivity extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener
 {
 
     private FirebaseAuth mAuth;
     private CallbackManager callbackManager;
     private static final String TAG = "FACEBOOK_LOGIN";
+    private TextView toastMe;
+    private LoginButton loginButton;
+    private NetworkStateReceiver networkStateReceiver;
 
-
+    public void onDestroy() {
+        super.onDestroy();
+        networkStateReceiver.removeListener(this);
+        this.unregisterReceiver(networkStateReceiver);
+    }
 
     @Override
     protected void onCreate(Bundle savedInstanceState)
     {
+
         super.onCreate(savedInstanceState);
+
+
         setContentView(R.layout.fragment_login);
 
 
+        loginButton = findViewById(R.id.login_button);
 
-        // Initialize Firebase Auth
-        mAuth = FirebaseAuth.getInstance();
+        networkStateReceiver = new NetworkStateReceiver();
+        networkStateReceiver.addListener(this);
+        this.registerReceiver(networkStateReceiver, new IntentFilter(android.net.ConnectivityManager.CONNECTIVITY_ACTION));
 
-        callbackManager = CallbackManager.Factory.create();
+        toastMe = findViewById(R.id.error_toast);
 
-        LoginButton loginButton = findViewById(R.id.login_button);
-        loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
-        // If you are using in a fragment, call loginButton.setFragment(this);
+        if(isNetworkAvailable()) {
 
-        // Callback registration
-        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>()
-        {
-            @Override
-            public void onSuccess(LoginResult loginResult)
-            {
-                // gets the access token and create auth token
-                // then signs in with credentials
-                handleFacebookAccessToken(loginResult.getAccessToken());
-
-                updateUI();
+            toastMe.setText(R.string.terms_cond);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                toastMe.setTextColor(getResources().getColor(R.color.white, null));
             }
 
-            @Override
-            public void onCancel()
-            {
-                // App code
-                Toast.makeText(MainActivity.this, R.string.toast_id_not_saved, Toast.LENGTH_LONG).show();
+            myMainActivityFunc();
+
+        }
+        else {
+            final LoginButton loginButton = findViewById(R.id.login_button);
+
+            loginButton.setClickable(false);
+
+            toastMe.setText(R.string.toast_network);
+            if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+                toastMe.setTextColor(getResources().getColor(R.color.red, null));
             }
 
-            @Override
-            public void onError(FacebookException exception)
-            {
-                // App code
-            }
-        });
+            Toast.makeText(MainActivity.this, R.string.toast_network, Toast.LENGTH_LONG).show();
 
-    }
+        }
 
-    @Override
-    protected void onStart()
+}
+
+
+private void myMainActivityFunc()
     {
-        super.onStart();
-        // Check if user is signed in (non-null) and update UI accordingly.
+        mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
         Log.i(TAG, "onStart: TEST DIS" + currentUser);
@@ -101,6 +118,35 @@ public class MainActivity extends AppCompatActivity
         {
             updateUI();
         }
+
+        callbackManager = CallbackManager.Factory.create();
+
+
+        loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
+        // If you are using in a fragment, call loginButton.setFragment(this);
+
+        // Callback registration
+        loginButton.registerCallback(callbackManager, new FacebookCallback<LoginResult>() {
+            @Override
+            public void onSuccess(LoginResult loginResult) {
+                // gets the access token and create auth token
+                // then signs in with credentials
+                handleFacebookAccessToken(loginResult.getAccessToken());
+
+                updateUI();
+            }
+
+            @Override
+            public void onCancel() {
+                // App code
+                Toast.makeText(MainActivity.this, R.string.toast_id_not_saved, Toast.LENGTH_LONG).show();
+            }
+
+            @Override
+            public void onError(FacebookException exception) {
+                // App code
+            }
+        });
     }
 
     private void updateUI()
@@ -140,11 +186,9 @@ public class MainActivity extends AppCompatActivity
                             FirebaseUser user = mAuth.getCurrentUser();
 
 
-                            Person person = new Person(Objects.requireNonNull(user).getDisplayName(),user.getEmail(),user.getPhotoUrl().toString());
+                            Person person = new Person(Objects.requireNonNull(user).getDisplayName(),user.getEmail(),Objects.requireNonNull(user.getPhotoUrl()).toString());
 
                             DatabaseReference mDatabase;
-
-                            String phone = user.getPhoneNumber();
 
                             mDatabase = FirebaseDatabase.getInstance().getReference();
 
@@ -165,5 +209,86 @@ public class MainActivity extends AppCompatActivity
                 });
     }
 
+    private boolean isNetworkAvailable()
+    {
+        ConnectivityManager connectivityManager
+                = (ConnectivityManager) getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo activeNetworkInfo = connectivityManager.getActiveNetworkInfo();
+        return activeNetworkInfo != null && activeNetworkInfo.isConnected();
+    }
 
+
+    @Override
+    public void networkAvailable()
+    {
+        toastMe.setText(R.string.terms_cond);
+        if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.M) {
+            toastMe.setTextColor(getResources().getColor(R.color.white, null));
+        }
+        loginButton.setClickable(true);
+
+       Toast.makeText(this, R.string.network_connected_toast, Toast.LENGTH_SHORT).show();
+        myMainActivityFunc();
+    }
+
+    @Override
+    public void networkUnavailable() {
+
+    }
+}
+
+class NetworkStateReceiver extends BroadcastReceiver {
+
+    protected Set<NetworkStateReceiverListener> listeners;
+    protected Boolean connected;
+
+    public NetworkStateReceiver() {
+        listeners = new HashSet<NetworkStateReceiverListener>();
+        connected = null;
+    }
+
+    public void onReceive(Context context, Intent intent) {
+        if(intent == null || intent.getExtras() == null)
+            return;
+
+        ConnectivityManager manager = (ConnectivityManager) context.getSystemService(Context.CONNECTIVITY_SERVICE);
+        NetworkInfo ni = manager.getActiveNetworkInfo();
+
+        if(ni != null && ni.getState() == NetworkInfo.State.CONNECTED) {
+            connected = true;
+        } else if(intent.getBooleanExtra(ConnectivityManager.EXTRA_NO_CONNECTIVITY,Boolean.FALSE)) {
+            connected = false;
+        }
+
+        notifyStateToAll();
+    }
+
+    private void notifyStateToAll() {
+        for(NetworkStateReceiverListener listener : listeners)
+            notifyState(listener);
+    }
+
+    private void notifyState(NetworkStateReceiverListener listener) {
+        if(connected == null || listener == null)
+            return;
+
+        if(connected == true)
+            listener.networkAvailable();
+        else
+            listener.networkUnavailable();
+    }
+
+    public void addListener(NetworkStateReceiverListener l) {
+        listeners.add(l);
+        notifyState(l);
+    }
+
+    public void removeListener(NetworkStateReceiverListener l) {
+        listeners.remove(l);
+    }
+
+    public interface NetworkStateReceiverListener {
+        public void networkAvailable();
+        public void networkUnavailable();
+    }
 }

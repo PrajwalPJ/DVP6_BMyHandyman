@@ -9,7 +9,6 @@ import android.content.Context;
 import android.content.Intent;
 import android.net.Uri;
 import android.os.Bundle;
-import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -19,7 +18,6 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
-import android.widget.AdapterView;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
 
@@ -55,7 +53,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         if (serviceOrderAdapter != null && !newText.isEmpty()) {
             serviceOrderAdapter.getFilter().filter(newText);
         } else {
-            serviceOrderAdapter.myServiceOrders = orders;
+            Objects.requireNonNull(serviceOrderAdapter).myServiceOrders = orders;
             serviceOrderAdapter.filteredData = orders;
             serviceOrderAdapter.notifyDataSetChanged();
         }
@@ -63,15 +61,11 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         if (handyManAdapter != null && !newText.isEmpty()) {
             handyManAdapter.getFilter().filter(newText);
         } else {
-            handyManAdapter.myHandymen = handymen;
+            Objects.requireNonNull(handyManAdapter).myHandymen = handymen;
             handyManAdapter.filteredData = handymen;
             handyManAdapter.notifyDataSetChanged();
         }
         return false;
-    }
-
-    public interface ExploreFragmentListener {
-        void searchButtonClick();
     }
 
     public static ExploreFragment newInstance(String selector) {
@@ -169,12 +163,12 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         inflater.inflate(R.menu.menu_search, menu);
 
         SearchManager searchManager = (SearchManager)
-                getContext().getSystemService(Context.SEARCH_SERVICE);
+                Objects.requireNonNull(getContext()).getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchMenuItem = menu.findItem(R.id.search_button);
         SearchView searchView = (SearchView) searchMenuItem.getActionView();
 
-        searchView.setSearchableInfo(searchManager.
-                getSearchableInfo(getActivity().getComponentName()));
+        searchView.setSearchableInfo(Objects.requireNonNull(searchManager).
+                getSearchableInfo(Objects.requireNonNull(getActivity()).getComponentName()));
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
 
