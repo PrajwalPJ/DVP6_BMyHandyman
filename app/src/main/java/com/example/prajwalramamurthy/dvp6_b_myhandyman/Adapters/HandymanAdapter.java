@@ -5,15 +5,19 @@ import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
+import android.widget.Filter;
+import android.widget.Filterable;
 import android.widget.TextView;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.Handyman;
+import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
-public class HandymanAdapter extends BaseAdapter
+public class HandymanAdapter extends BaseAdapter implements Filterable
 {
 
     // BASE ID
@@ -23,21 +27,22 @@ public class HandymanAdapter extends BaseAdapter
     private final Context mContext;
 
     // Reference to our collection
-    private final ArrayList<Handyman> myHandymen;
+    public ArrayList<Handyman> myHandymen;
 
     public HandymanAdapter(Context mContext, ArrayList<Handyman> myServiceOrders)
     {
         this.mContext = mContext;
         this.myHandymen = myServiceOrders;
+        this.filteredData = myServiceOrders;
     }
 
     // get size
     @Override
     public int getCount()
     {
-        if (myHandymen != null)
+        if (filteredData != null)
         {
-            return myHandymen.size();
+            return filteredData.size();
         }
         return 0;
     }
@@ -47,8 +52,8 @@ public class HandymanAdapter extends BaseAdapter
     public Object getItem(int position)
     {
 
-        if (myHandymen != null && position >= 0 || position < Objects.requireNonNull(myHandymen).size()) {
-            return myHandymen.get(position);
+        if (filteredData != null && position >= 0 || position < Objects.requireNonNull(filteredData).size()) {
+            return filteredData.get(position);
         }
 
         return null;
@@ -95,6 +100,52 @@ public class HandymanAdapter extends BaseAdapter
             return convertView;
         }
         return null;
+    }
+
+    public List<Handyman> filteredData = null;
+
+    ItemFilter filter = new ItemFilter();
+
+    @Override
+    public Filter getFilter() {
+        return filter;
+    }
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String filterString = constraint.toString().toLowerCase();
+
+            FilterResults results = new FilterResults();
+
+            final List<Handyman> list = myHandymen;
+
+            int count = list.size();
+            final ArrayList<Handyman> nlist = new ArrayList<Handyman>(count);
+
+            Handyman filterableString ;
+
+            for (int i = 0; i < count; i++) {
+                filterableString = list.get(i);
+                if (filterableString.mTitle.toLowerCase().contains(filterString)) {
+                    nlist.add(filterableString);
+                }
+            }
+
+            results.values = nlist;
+            results.count = nlist.size();
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredData = (ArrayList<Handyman>) results.values;
+            notifyDataSetChanged();
+        }
+
     }
 
 

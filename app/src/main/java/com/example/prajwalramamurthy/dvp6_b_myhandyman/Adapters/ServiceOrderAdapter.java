@@ -13,6 +13,7 @@ import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.R;
 
 import java.util.ArrayList;
+import java.util.List;
 import java.util.Objects;
 
 public class ServiceOrderAdapter extends BaseAdapter implements Filterable
@@ -25,21 +26,22 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
     private final Context mContext;
 
     // Reference to our collection
-    private final ArrayList<ServiceOrder> myServiceOrders;
+    public  ArrayList<ServiceOrder> myServiceOrders;
 
     public ServiceOrderAdapter(Context mContext, ArrayList<ServiceOrder> myServiceOrders)
     {
         this.mContext = mContext;
         this.myServiceOrders = myServiceOrders;
+        this.filteredData = myServiceOrders;
     }
 
     // get size
     @Override
     public int getCount()
     {
-        if (myServiceOrders != null)
+        if (filteredData != null)
         {
-            return myServiceOrders.size();
+            return filteredData.size();
         }
         return 0;
     }
@@ -49,8 +51,8 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
     public Object getItem(int position)
     {
 
-        if (myServiceOrders != null && position >= 0 || position < Objects.requireNonNull(myServiceOrders).size()) {
-            return myServiceOrders.get(position);
+        if (filteredData != null && position >= 0 || position < Objects.requireNonNull(filteredData).size()) {
+            return filteredData.get(position);
         }
 
         return null;
@@ -98,9 +100,50 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
         return null;
     }
 
+    private ItemFilter mFilter = new ItemFilter();
+
     @Override
     public Filter getFilter() {
-        return null;
+        return mFilter;
+    }
+
+    public List<ServiceOrder>filteredData = null;
+
+    private class ItemFilter extends Filter {
+        @Override
+        protected FilterResults performFiltering(CharSequence constraint) {
+
+            String filterString = constraint.toString().toLowerCase();
+
+            FilterResults results = new FilterResults();
+
+            final List<ServiceOrder> list = myServiceOrders;
+
+            int count = list.size();
+            final ArrayList<ServiceOrder> nlist = new ArrayList<ServiceOrder>(count);
+
+            ServiceOrder filterableString ;
+
+            for (int i = 0; i < count; i++) {
+                filterableString = list.get(i);
+                if (filterableString.mTitle.toLowerCase().contains(filterString)) {
+                    nlist.add(filterableString);
+                }
+            }
+
+            results.values = nlist;
+            results.count = nlist.size();
+
+            return results;
+        }
+
+        @SuppressWarnings("unchecked")
+        @Override
+        protected void publishResults(CharSequence constraint, FilterResults results) {
+            filteredData = (ArrayList<ServiceOrder>) results.values;
+            notifyDataSetChanged();
+        }
+
     }
 
     // Optimize with view holder!

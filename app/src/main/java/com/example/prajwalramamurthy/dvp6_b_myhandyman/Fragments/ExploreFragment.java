@@ -17,7 +17,7 @@ import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.ListView;
-import android.widget.SearchView;
+import android.support.v7.widget.SearchView;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters.HandymanAdapter;
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters.ServiceOrderAdapter;
@@ -48,7 +48,21 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        //serviceOrderAdapter.get
+        if(serviceOrderAdapter != null && !newText.isEmpty()) {
+            serviceOrderAdapter.getFilter().filter(newText);
+        } else {
+            serviceOrderAdapter.myServiceOrders = orders;
+            serviceOrderAdapter.filteredData = orders;
+            serviceOrderAdapter.notifyDataSetChanged();
+        }
+
+        if(handyManAdapter != null && !newText.isEmpty()) {
+            handyManAdapter.getFilter().filter(newText);
+        }else {
+            handyManAdapter.myHandymen = handymen;
+            handyManAdapter.filteredData = handymen;
+            handyManAdapter.notifyDataSetChanged();
+        }
         return false;
     }
 
