@@ -4,15 +4,17 @@
 
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel;
 
+import java.io.Serializable;
+
 public class Person
 {
 
     // member variables
-    private int mId;
-    private String mFirstName;
-    private String mLastName;
-    private String mEmail;
-    private String mPhoneNumber;
+    public int mId;
+    public String mFirstName;
+    public String mLastName;
+    public String mEmail;
+    public String mPhoneNumber;
 
 
     public Person(){}

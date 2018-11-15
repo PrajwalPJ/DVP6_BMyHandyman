@@ -131,7 +131,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     public void onVerifyButtonClick()
     {
         //verificationFragment =  VerificationFragment.newInstance();
-        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,verificationFragment).commit();
+        getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,VerificationFragment.newInstance()).commit();
     }
 
     @Override

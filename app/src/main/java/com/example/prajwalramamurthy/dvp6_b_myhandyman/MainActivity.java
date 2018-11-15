@@ -143,7 +143,7 @@ public class MainActivity extends AppCompatActivity
                             Person person = new Person(Objects.requireNonNull(user).getDisplayName(),user.getEmail());
 
                             DatabaseReference mDatabase;
-// ...
+
                             mDatabase = FirebaseDatabase.getInstance().getReference();
 
                             if (user != null) {
@@ -156,7 +156,7 @@ public class MainActivity extends AppCompatActivity
                             {
                             // If sign in fails, display a message to the user.
                             Log.w(TAG, "signInWithCredential:failure", task.getException());
-                            Toast.makeText(MainActivity.this, "Authentication failed.",
+                            Toast.makeText(MainActivity.this, R.string.fb_auth_fail_toast,
                                     Toast.LENGTH_SHORT).show();
                             updateUI();
                         }

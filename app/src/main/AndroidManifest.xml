@@ -71,10 +71,6 @@
         <!--activities-->
 
         <activity android:name=".Activities.NavigationActivity"/>
-        <activity android:name=".Activities.CreateActivity"/>
-        <activity android:name=".Activities.ExploreActivity"/>
-        <activity android:name=".Activities.ProfileActivity" />
-        <activity android:name=".Activities.CreateHandymanActivty" />
 
     </application>
 

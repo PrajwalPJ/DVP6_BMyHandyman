@@ -24,7 +24,7 @@
     <string name="explore">Explore</string>
     <string name="create">Create</string>
     <string name="profile">Profile</string>
-    <string name="login_toast">You\'re logged in</string>
+    <string name="login_toast">Success! You\'re logged in</string>
     <string name="create_a_service_order">Create a service order</string>
     <string name="time">Time</string>
     <string name="date">Date</string>
@@ -42,7 +42,7 @@
     <string name="list_a_handyman">List a handyman</string>
     <string name="bio">Bio</string>
     <string name="years_of_experience">Years of Experience</string>
-    <string name="rate_per_hour">Rate Per Hour</string>
+    <string name="rate_per_hour">Rate Per Hour($)</string>
     <string name="availability">Availability</string>
     <string name="not_a_handyman_click_here_to_post_a_service_order">Not a handyman? Click here to post a service order</string>
     <string name="save">Save</string>
@@ -50,6 +50,7 @@
     <string name="upload_or_take_an_image_to_verify_documentation">Upload or take an image to verify documentation</string>
     <string name="toast_id_saved">Success! ID was saved!</string>
     <string name="toast_id_not_saved">Oops! There was no ID. Verification is not Complete.</string>
+    <string name="fb_auth_fail_toast">Authentication failed.</string>
 
 
 </resources>
