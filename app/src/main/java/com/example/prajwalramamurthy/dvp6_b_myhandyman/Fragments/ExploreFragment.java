@@ -6,7 +6,10 @@ package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.app.SearchManager;
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.os.Bundle;
+import android.os.Handler;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -16,6 +19,7 @@ import android.view.MenuInflater;
 import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.support.v7.widget.SearchView;
 
@@ -48,7 +52,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Override
     public boolean onQueryTextChange(String newText) {
-        if(serviceOrderAdapter != null && !newText.isEmpty()) {
+        if (serviceOrderAdapter != null && !newText.isEmpty()) {
             serviceOrderAdapter.getFilter().filter(newText);
         } else {
             serviceOrderAdapter.myServiceOrders = orders;
@@ -56,9 +60,9 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
             serviceOrderAdapter.notifyDataSetChanged();
         }
 
-        if(handyManAdapter != null && !newText.isEmpty()) {
+        if (handyManAdapter != null && !newText.isEmpty()) {
             handyManAdapter.getFilter().filter(newText);
-        }else {
+        } else {
             handyManAdapter.myHandymen = handymen;
             handyManAdapter.filteredData = handymen;
             handyManAdapter.notifyDataSetChanged();
@@ -66,13 +70,11 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         return false;
     }
 
-    public interface ExploreFragmentListener
-    {
+    public interface ExploreFragmentListener {
         void searchButtonClick();
     }
 
-    public static ExploreFragment newInstance(String selector)
-    {
+    public static ExploreFragment newInstance(String selector) {
 
         ExploreFragment fragment = new ExploreFragment();
         fragment.selector = selector;
@@ -90,9 +92,9 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
                 // Get Post object and use the values to update the UI
-                for (DataSnapshot postSnapshot: dataSnapshot.getChildren()) {
+                for (DataSnapshot postSnapshot : dataSnapshot.getChildren()) {
 
-                    if(Objects.equals(selector, "orders")) {
+                    if (Objects.equals(selector, "orders")) {
                         ServiceOrder order = postSnapshot.getValue(ServiceOrder.class);
                         orders.add(order);
                     } else {
@@ -128,23 +130,21 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         serviceOrderAdapter = new ServiceOrderAdapter(getContext(), orders);
         handyManAdapter = new HandymanAdapter(getContext(), handymen);
 
+
         ListView myListView = view.findViewById(R.id.myListView);
 
 
-        if (selector  == "orders") {
+        if (selector == "orders") {
             myListView.setAdapter(serviceOrderAdapter);
-        } else if(selector  == "handyman") {
+        } else if (selector == "handyman") {
             myListView.setAdapter(handyManAdapter);
         }
-
     }
 
 
     @Override
-    public void onCreate(@Nullable Bundle savedInstanceState)
-    {
+    public void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-
 
         setHasOptionsMenu(true);
 
@@ -153,21 +153,14 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
     @Nullable
     @Override
-    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState)
-    {
-     setHasOptionsMenu(true);
+    public View onCreateView(@NonNull LayoutInflater inflater, @Nullable ViewGroup container, @Nullable Bundle savedInstanceState) {
+        setHasOptionsMenu(true);
         return inflater.inflate(R.layout.fragment_explore, container, false);
     }
 
-    @Override
-    public void onActivityCreated(@Nullable Bundle savedInstanceState)
-    {
-        super.onActivityCreated(savedInstanceState);
-    }
 
     @Override
-    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater)
-    {
+    public void onCreateOptionsMenu(Menu menu, MenuInflater inflater) {
 
         super.onCreateOptionsMenu(menu, inflater);
 
@@ -185,43 +178,29 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         searchView.setSubmitButtonEnabled(true);
         searchView.setOnQueryTextListener(this);
 
-//        SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
-//        MenuItem searchMenuItem = menu.findItem(R.id.search_button);
-//        SearchView searchView = (SearchView) searchMenuItem.getActionView();
-//
-//
-//        searchView.setSubmitButtonEnabled(true);
-//        searchView.setOnQueryTextListener(new SearchView.OnQueryTextListener() {
-//            @Override
-//            public boolean onQueryTextSubmit(String query) {
-//
-//
-//                String some = query;
-//
-//                return false;
-//            }
-//
-//            @Override
-//            public boolean onQueryTextChange(String newText) {
-//                return false;
-//            }
-//        });
-
-
-//        SearchManager searchManager = (SearchManager) getContext().getSystemService(Context.SEARCH_SERVICE);
-//        MenuItem searchMenuItem = menu.findItem(R.id.search_button);
-//        SearchView searchView = null;
-//
-//        if (searchMenuItem != null) {
-//            searchView = (SearchView) searchMenuItem.getActionView();
-//        }
-//        if (searchView != null) {
-//            searchView.setSearchableInfo(searchManager.getSearchableInfo(MainActivity.this.getComponentName()));
-//        }
-//        return super.onCreateOptionsMenu(menu);
 
     }
 
 
 
+    @Override
+    public boolean onOptionsItemSelected(MenuItem item) {
+        Integer itemId = item.getItemId();
+
+
+        switch (itemId) {
+            case R.id.map_button: {
+
+
+                Uri gmmIntentUri = Uri.parse("geo:0,0?q=");
+                Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                mapIntent.setPackage("com.google.android.apps.maps");
+                startActivity(mapIntent);
+            }
+            break;
+
+        }
+        return true;
+    }
 }
+

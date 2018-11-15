@@ -179,64 +179,7 @@ public class VerificationFragment extends Fragment
 
     }
 
-
-//
-//    @RequiresApi(api = Build.VERSION_CODES.M)
-//    private void checkFilePermissions() {
-//        if(Build.VERSION.SDK_INT > Build.VERSION_CODES.LOLLIPOP){
-//            int permissionCheck = Objects.requireNonNull(getContext()).checkSelfPermission("Manifest.permission.READ_EXTERNAL_STORAGE");
-//            permissionCheck += Objects.requireNonNull(getContext()).checkSelfPermission("Manifest.permission.WRITE_EXTERNAL_STORAGE");
-//            if (permissionCheck != 0) {
-//                this.requestPermissions(new String[]{android.Manifest.permission.WRITE_EXTERNAL_STORAGE,android.Manifest.permission.READ_EXTERNAL_STORAGE}, 1001); //Any number
-//            }
-//        }else{
-//            Log.d("", "checkBTPermissions: No need to check permissions. SDK version < LOLLIPOP.");
-//        }
-//    }
-//
-//    @Override
-//    public void onActivityResult(int requestCode, int resultCode, Intent data)
-//    {
-//        super.onActivityResult(requestCode, resultCode, data);
-//
-//        mDatabase.child("imageUrl").push();
-//
-//        if(resultCode == RESULT_OK && requestCode == PICTURE_REQUEST)
-//        {
-//            Uri imageUri = data.getData();
-//            photoViewImage.setImageURI(imageUri);
-//
-//            try
-//            {
-//                Bitmap bitmap = MediaStore.Images.Media.getBitmap(Objects.requireNonNull(getContext()).getContentResolver(), imageUri);
-//                photoViewImage.setImageBitmap(bitmap);
-//
-//            }
-//            catch (IOException e)
-//            {
-//                e.printStackTrace();
-//            }
-//        }
-
-//        if (requestCode == RESULT_OK && resultCode == getActivity().RESULT_OK) {
-//            Bundle extras = data.getExtras();
-//            Bitmap imageBitmap = (Bitmap) extras.get("data");
-//            photoViewImage.setImageBitmap(imageBitmap);
-//            encodeBitmapAndSaveToFirebase(imageBitmap);
-//        }
-    //}
-
-//    public void encodeBitmapAndSaveToFirebase(Bitmap bitmap) {
-//        ByteArrayOutputStream baos = new ByteArrayOutputStream();
-//        bitmap.compress(Bitmap.CompressFormat.PNG, 100, baos);
-//        String imageEncoded = Base64.encodeToString(baos.toByteArray(), Base64.DEFAULT);
-//        DatabaseReference ref = FirebaseDatabase.getInstance()
-//                .getReference(Constants.IAP_PRODUCT_ID)
-//                .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
-//                //.child(// TODO .getPushId())
-//                .child("imageUrl");
-//        ref.setValue(imageEncoded);
-//    }
+    
 
     @Override
     public void onCreate(@Nullable Bundle savedInstanceState)

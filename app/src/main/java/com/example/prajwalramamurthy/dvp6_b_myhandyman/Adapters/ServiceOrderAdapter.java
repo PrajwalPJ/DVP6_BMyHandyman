@@ -1,12 +1,15 @@
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters;
 
 import android.content.Context;
+import android.content.Intent;
+import android.net.Uri;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.BaseAdapter;
 import android.widget.Filter;
 import android.widget.Filterable;
+import android.widget.ImageView;
 import android.widget.TextView;
 
 import com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel.ServiceOrder;
@@ -69,7 +72,7 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
 
     // put everything together
     @Override
-    public View getView(int position, View convertView, ViewGroup parent)
+    public View getView(final int position, View convertView, ViewGroup parent)
     {
         ViewHolder viewHolder;
 
@@ -84,7 +87,7 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
             viewHolder = (ViewHolder)convertView.getTag();
         }
 
-        ServiceOrder order = (ServiceOrder) getItem(position);
+        final ServiceOrder order = (ServiceOrder) getItem(position);
 
         // see if person is null
         if(order != null)
@@ -94,6 +97,17 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
             viewHolder.loc.setText(order.mLocation);
             viewHolder.time.setText(order.mTime);
             viewHolder.date.setText(order.mDate);
+
+            viewHolder.loc.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    String query = "geo:0,0?q=" + order.mLocation;
+                    Uri gmmIntentUri = Uri.parse(query);
+                    Intent mapIntent = new Intent(Intent.ACTION_VIEW, gmmIntentUri);
+                    mapIntent.setPackage("com.google.android.apps.maps");
+                    mContext.startActivity(mapIntent);
+                }
+            });
 
             return convertView;
         }
