@@ -12,14 +12,20 @@ PROBLEMS THE APP DOES NOT SOLVE/WHAT THE APP DOES NOT DO
 1.	App does not allow in app payments as of now.
 
 HOW TO RUN THE APP 
-1. As on now I have not made it public for facebook. Only I will be able to login to my facebook. 
-2. If you want to test the app then we need to skip the Facebook login. 
+1. The app is now public and you can use your facebook to login and run the app.
 
-Step One: Go to Manifest and change the main launch activity from .MainActivity to .NavigationActivity
-Step Two: Comment out the NavigationActivity at the bottom on Manifest file
 
-Now you will be able to test the rest of the app. 
+There is honestly a lot that went on this week. I literally had to start back up from milestone one and go through each user story and functionality and make sure it’s perfect. I spent a lot of time fixing many things from day one. One example is the profile page I went back and removed the data I cannot pull from the Facebook and firebase database. Facebook only allows permissions for so many fields. Now it’s so much smoother pulling from the database. 
 
-I worked extremely hard this week and put in over 50 hours logged on my milestone two. I have 90% of my milestone done. Just need to tweak on a few things a little. I already fixed the couple issues I have having during my presentation. 
+I spent mad amount of time trying to save an image to the firebase database for the verification feature. I had to convert the image into a url and then store that in the storage reference. Then I must get access to that to check if it is not empty and then do a check for the button to change color to green and change the text to verified. I had to use an interface to make that happen. It was just a mess now I can do it easily for the future. 
 
+I have about 30 hours this week logged and most of it is coding. Overall have over 100 hours on this project. I over scoped the project but it is amazing to see that I got it all done. I have all my database done and fully functional as well. 
+	
+I also had the app tested by 3 different people and with their feedback changed many things and each time I made changed I updated it on my Github. The app is currently public and I handled that on Facebook developer console. 
+
+I worked hard and I got everything done in fact more than what I planned for and I am satisfied with my work. 
+
+BUGS: I have had 3 users test it and run it so there should not be any bugs.
+
+Prajwal Ramamurthy
 
