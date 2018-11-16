@@ -1,6 +1,8 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Activities;
-
-
 
 import android.content.Intent;
 import android.graphics.Bitmap;
@@ -37,7 +39,6 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     private TabFragment exploreFragment;
     private ProfileFragment profileFragment;
     private VerificationFragment verificationFragment;
-
     private static final int PICTURE_REQUEST = 0x0101;
 
     @Override
@@ -73,8 +74,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
                 {
                     case R.id.nav_explore:
 
-                        // change the color when selected
-
+                        // load my tab fragment
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, TabFragment.newInstance()).commit();
                         exploreFragment.onResume();
 
@@ -82,9 +82,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
 
                     case R.id.nav_create:
 
-                        // change the color when selected
-                        myBottomNavBar.setItemBackgroundResource(R.color.colorPrimary);
-
+                        // load create fragment
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,createFragment).commit();
 
                         return true;
@@ -92,8 +90,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
 
                     case R.id.nav_profile:
 
-                        // change the color when selected
-
+                        // load profile fragment
                         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, profileFragment).commit();
 
                         return true;
@@ -119,6 +116,9 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     {
         super.onActivityResult(requestCode, resultCode, data);
 
+        // get image Uri
+        // convert imageto bitmap
+        // display it in image view
         if(requestCode == PICTURE_REQUEST)
         {
             Uri imageUri = Objects.requireNonNull(data).getData();
@@ -141,10 +141,12 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     }
 
 
-
+    // All these methods work as interface methods and each handle different functionalities based on the corresponding fragments
+    // When verifi button is clicked
     @Override
     public void onVerifyButtonClick()
     {
+        // it will launch the verification fragment
         verificationFragment =  VerificationFragment.newInstance();
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout,verificationFragment,"VerificationFragment").commit();
     }
@@ -157,6 +159,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
         startActivity(intent);
     }
 
+    // when camera icon is clicked open the camera app
     @Override
     public void getCameraResult()
     {
@@ -167,6 +170,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
 
     }
 
+    // once the save button is clicked launch profile fragment after
     @Override
     public void saveVerifiedData()
     {
@@ -175,6 +179,9 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
 
     }
 
+    // when upload id button is clicked
+    // get access to gallery from the device
+    // and then fill the image view with selected image
     @Override
     public void uploadID()
     {
@@ -188,7 +195,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
     }
 
 
-
+    // when link clicked change fragments
     @Override
     public void onAreYouAHandymanLink()
     {
@@ -196,6 +203,7 @@ public class NavigationActivity extends AppCompatActivity implements ProfileFrag
         getSupportFragmentManager().beginTransaction().replace(R.id.main_frame_layout, createHandymanFragment).commit();
     }
 
+    // switch fragments when clicked
     @Override
     public void onPostServiceOrderLink()
     {

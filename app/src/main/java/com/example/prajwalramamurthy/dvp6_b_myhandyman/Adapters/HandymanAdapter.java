@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters;
 
 import android.content.Context;
@@ -107,6 +111,7 @@ public class HandymanAdapter extends BaseAdapter implements Filterable
 
     private final ItemFilter filter = new ItemFilter();
 
+    // will handle the filter feature of our search button
     @Override
     public Filter getFilter() {
         return filter;
@@ -127,6 +132,7 @@ public class HandymanAdapter extends BaseAdapter implements Filterable
 
             Handyman filterableString ;
 
+            // loop through the string
             for (int i = 0; i < count; i++) {
                 filterableString = list.get(i);
                 if (filterableString.mTitle.toLowerCase().contains(filterString)) {

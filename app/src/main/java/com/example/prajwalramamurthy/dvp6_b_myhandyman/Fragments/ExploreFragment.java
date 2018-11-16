@@ -48,6 +48,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         return false;
     }
 
+    // will handle the filter for the search button
     @Override
     public boolean onQueryTextChange(String newText) {
         if (serviceOrderAdapter != null && !newText.isEmpty()) {
@@ -120,7 +121,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
-
+        // instantiate adapters
         serviceOrderAdapter = new ServiceOrderAdapter(getContext(), orders);
         handyManAdapter = new HandymanAdapter(getContext(), handymen);
 
@@ -128,6 +129,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         ListView myListView = view.findViewById(R.id.myListView);
 
 
+        // set adapter based on the tab selected
         if (selector == "orders") {
             myListView.setAdapter(serviceOrderAdapter);
         } else if (selector == "handyman") {
@@ -162,6 +164,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
 
         inflater.inflate(R.menu.menu_search, menu);
 
+        // create our search manager to handle the search functionality
         SearchManager searchManager = (SearchManager)
                 Objects.requireNonNull(getContext()).getSystemService(Context.SEARCH_SERVICE);
         MenuItem searchMenuItem = menu.findItem(R.id.search_button);
@@ -183,7 +186,7 @@ public class ExploreFragment extends Fragment implements SearchView.OnQueryTextL
         setHasOptionsMenu(true);
         Integer itemId = item.getItemId();
 
-
+        // when map button is clicked this will intent and open google maps
         switch (itemId) {
             case R.id.map_button: {
 

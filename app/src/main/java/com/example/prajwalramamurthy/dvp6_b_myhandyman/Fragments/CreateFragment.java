@@ -38,7 +38,7 @@ import java.util.Objects;
 public class CreateFragment extends Fragment implements DatePickerDialog.OnDateSetListener
 {
 
-
+    // member variables
     private EditText title;
     private EditText desc;
     private EditText location;
@@ -48,7 +48,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     private CreateFragmentListener myCreateListener;
     private DatabaseReference mDatabase;
 
-
+    // interface
     public interface CreateFragmentListener
     {
         void onAreYouAHandymanLink();
@@ -92,6 +92,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // get database reference
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         TextView createHandyman = Objects.requireNonNull(getView()).findViewById(R.id.createHandymanLink);
@@ -114,6 +115,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
 
         super.onCreateOptionsMenu(menu, inflater);
 
+        // inflate search menu after find
         MenuItem search = menu.findItem(R.id.search_button);
 
         search.setVisible(false);
@@ -181,6 +183,7 @@ public class CreateFragment extends Fragment implements DatePickerDialog.OnDateS
     }
 
 
+    // function to format date picker
     @Override
     public void onDateSet(DatePicker view, int year, int month, int dayOfMonth)
     {

@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel;
 
 public class ServiceOrder {
@@ -10,8 +14,8 @@ public class ServiceOrder {
     public String mTime;
     public String mDate;
 
-    public ServiceOrder() {}
 
+    // constructor
     public ServiceOrder(String mTitle, String mDescription, String mLocation, String mTime, String mDate) {
         this.mTitle = mTitle;
         this.mDescription = mDescription;
@@ -19,13 +23,5 @@ public class ServiceOrder {
         this.mTime = mTime;
         this.mDate = mDate;
     }
-//
-//    public ServiceOrder(int mId, String mTitle, String mDescription, String mLocation, String mTime, String mDate) {
-//        this.mId = mId;
-//        this.mTitle = mTitle;
-//        this.mDescription = mDescription;
-//        this.mLocation = mLocation;
-//        this.mTime = mTime;
-//        this.mDate = mDate;
-//    }
+
 }

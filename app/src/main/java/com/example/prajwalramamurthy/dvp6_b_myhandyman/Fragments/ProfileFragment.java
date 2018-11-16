@@ -72,7 +72,6 @@ public class ProfileFragment extends Fragment
 
         menu.clear();
 
-        //inflater.inflate(R.menu.menu_edit, menu);
     }
 
 
@@ -94,7 +93,7 @@ public class ProfileFragment extends Fragment
 
         final Button verifyButton = view.findViewById(R.id.verifyButton);
 
-
+        // on click this will use interface to handle functionality
         verifyButton.setOnClickListener(new View.OnClickListener()
         {
             @Override
@@ -120,22 +119,25 @@ public class ProfileFragment extends Fragment
             @Override
             public void onDataChange(DataSnapshot dataSnapshot) {
 
-
+                // getting image from facebook
                 person = dataSnapshot.getValue(Person.class);
 
 
-                if(Objects.requireNonNull(person).profile_img !=null) {
+                // get profile picture
+                if(person.profile_img !=null) {
                    ImageView profile_img = view.findViewById(R.id.profile_pic);
                    Picasso.get().load(person
                    .profile_img).into(profile_img);
                 }
 
+                // get email and assign it to textview
                 if(person
                         .mEmail != null) {
                     ((TextView) view.findViewById(R.id.user_email_view)).setText(person
                     .mEmail);
                 }
 
+                // get name and assign it
                 if(person
                         .mFirstName != null) {
                     ((TextView) view.findViewById(R.id.user_name_text)).setText(person

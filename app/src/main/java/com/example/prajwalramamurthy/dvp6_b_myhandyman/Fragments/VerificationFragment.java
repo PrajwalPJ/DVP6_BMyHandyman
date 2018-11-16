@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.content.Context;
@@ -111,12 +115,16 @@ public class VerificationFragment extends Fragment
 
                 if(photoViewImage.getDrawable() != null)
                 {
+                    // will save our ID image to our database
+                    // show toast
                     Toast.makeText(getContext(), R.string.toast_id_saved, Toast.LENGTH_SHORT).show();
 
+                    // get reference
                     final StorageReference storageRef = FirebaseStorage.getInstance().getReference().child("IDImages");
 
                     StorageReference imagesRef = storageRef.child(String.valueOf((new Date()).getTime()) + ".jpg");
 
+                    // convert bitmap
                     Bitmap bitmap = ((BitmapDrawable) photoViewImage.getDrawable()).getBitmap();
                     ByteArrayOutputStream baos = new ByteArrayOutputStream();
                     bitmap.compress(Bitmap.CompressFormat.JPEG, 100, baos);
@@ -134,7 +142,6 @@ public class VerificationFragment extends Fragment
                         @Override
                         public void onSuccess(UploadTask.TaskSnapshot taskSnapshot) {
                             // taskSnapshot.getMetadata() contains file metadata such as size, content-type, etc.
-                            // ...
 
                             Uri url = taskSnapshot.getDownloadUrl();
 
@@ -145,7 +152,7 @@ public class VerificationFragment extends Fragment
                                DatabaseReference user = databaseReference.child("users").child(Objects.requireNonNull(uid));
 
                                user.child("id_img").setValue(Objects.requireNonNull(url).toString());
-//
+
                         }
                     });
 

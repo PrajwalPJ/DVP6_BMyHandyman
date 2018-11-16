@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters;
 
 import android.support.v4.app.Fragment;
@@ -17,6 +21,7 @@ public class PagerAdapter extends FragmentStatePagerAdapter {
     @Override
     public Fragment getItem(int position) {
 
+        // create new instance based on tabs selected
         switch (position) {
             case 0:
                 return ExploreFragment.newInstance("orders");

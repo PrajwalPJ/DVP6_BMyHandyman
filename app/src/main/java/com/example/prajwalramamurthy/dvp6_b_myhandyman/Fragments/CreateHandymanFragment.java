@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.content.Context;
@@ -96,7 +100,6 @@ public class CreateHandymanFragment extends Fragment
                     // catch and store the user input and pass it to our data model
                     String title = mTitle.getText().toString();
                     String bio = mBio.getText().toString();
-//                    String location = mLocation.getText().toString();
                     String avil = mAvailability.getText().toString();
                     String years = mYearsExp.getText().toString();
                     String rate = mHourRate.getText().toString();
@@ -123,10 +126,12 @@ public class CreateHandymanFragment extends Fragment
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // get database reference
         mDatabase = FirebaseDatabase.getInstance().getReference();
 
         TextView createServiceOrder = Objects.requireNonNull(getView()).findViewById(R.id.createServiceOrderLink);
 
+        // use interface to handle functionality
         createServiceOrder.setOnClickListener(new View.OnClickListener()
         {
             @Override

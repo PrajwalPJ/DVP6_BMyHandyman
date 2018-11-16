@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Fragments;
 
 import android.support.annotation.NonNull;
@@ -41,12 +45,14 @@ public class TabFragment extends Fragment {
     public void onViewCreated(@NonNull View view, @Nullable Bundle savedInstanceState) {
         super.onViewCreated(view, savedInstanceState);
 
+        // create the two tabs
 
         TabLayout tabLayout =  view.findViewById(R.id.tab_layout);
         tabLayout.addTab(tabLayout.newTab().setText("Service Order"));
         tabLayout.addTab(tabLayout.newTab().setText("Handyman"));
         tabLayout.setTabGravity(TabLayout.GRAVITY_FILL);
 
+        // set the adapters and listeners
         final ViewPager viewPager =  view.findViewById(R.id.pager);
         final PagerAdapter adapter = new PagerAdapter
                 (Objects.requireNonNull(getActivity()).getSupportFragmentManager(), tabLayout.getTabCount());

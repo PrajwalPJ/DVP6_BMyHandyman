@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.Adapters;
 
 import android.content.Context;
@@ -115,6 +119,8 @@ public class ServiceOrderAdapter extends BaseAdapter implements Filterable
 
     private final ItemFilter mFilter = new ItemFilter();
 
+
+    // will hanfle filter for the handymen
     @Override
     public Filter getFilter() {
         return mFilter;

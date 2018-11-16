@@ -1,3 +1,7 @@
+// Prajwal Ramamurthy
+// B-MyHandyman
+// DVP 6
+
 package com.example.prajwalramamurthy.dvp6_b_myhandyman.DataModel;
 
 public class Handyman
@@ -7,9 +11,8 @@ public class Handyman
     public String mYearsExp;
     public String mHourRate;
 
-    public Handyman() {
-    }
 
+    // constructor
     public Handyman(String mTitle, String mBio, String mAvailability, String mYearsExp, String mHourRate) {
         this.mTitle = mTitle;
         this.mBio = mBio;

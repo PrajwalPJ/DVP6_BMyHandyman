@@ -49,6 +49,7 @@ import java.util.Set;
 public class MainActivity extends AppCompatActivity implements NetworkStateReceiver.NetworkStateReceiverListener
 {
 
+    // member variables
     private FirebaseAuth mAuth;
     private CallbackManager callbackManager;
     private static final String TAG = "FACEBOOK_LOGIN";
@@ -56,6 +57,7 @@ public class MainActivity extends AppCompatActivity implements NetworkStateRecei
     private LoginButton loginButton;
     private NetworkStateReceiver networkStateReceiver;
 
+    // for internet purpose
     public void onDestroy() {
         super.onDestroy();
         networkStateReceiver.removeListener(this);
@@ -80,6 +82,7 @@ public class MainActivity extends AppCompatActivity implements NetworkStateRecei
 
         toastMe = findViewById(R.id.error_toast);
 
+        // first check for internet
         if(isNetworkAvailable()) {
 
             toastMe.setText(R.string.terms_cond);
@@ -106,9 +109,10 @@ public class MainActivity extends AppCompatActivity implements NetworkStateRecei
 
 }
 
-
+// cuatom function
 private void myMainActivityFunc()
     {
+        // instantiate firebase auth
         mAuth = FirebaseAuth.getInstance();
         FirebaseUser currentUser = mAuth.getCurrentUser();
 
@@ -120,7 +124,6 @@ private void myMainActivityFunc()
         }
 
         callbackManager = CallbackManager.Factory.create();
-
 
         loginButton.setReadPermissions(Arrays.asList("email", "public_profile"));
         // If you are using in a fragment, call loginButton.setFragment(this);
@@ -149,6 +152,7 @@ private void myMainActivityFunc()
         });
     }
 
+    // after login take us to navigation activity
     private void updateUI()
     {
         Toast.makeText(MainActivity.this, R.string.login_toast, Toast.LENGTH_SHORT).show();
@@ -168,6 +172,7 @@ private void myMainActivityFunc()
         callbackManager.onActivityResult(requestCode, resultCode, data);
     }
 
+    // facebook login functionality
     private void handleFacebookAccessToken(AccessToken token)
     {
         Log.d(TAG, "handleFacebookAccessToken:" + token);
@@ -209,6 +214,7 @@ private void myMainActivityFunc()
                 });
     }
 
+    // check networl status
     private boolean isNetworkAvailable()
     {
         ConnectivityManager connectivityManager
@@ -218,6 +224,7 @@ private void myMainActivityFunc()
     }
 
 
+    // if there is network do this
     @Override
     public void networkAvailable()
     {
@@ -237,6 +244,8 @@ private void myMainActivityFunc()
     }
 }
 
+
+// custom class to handle network info
 class NetworkStateReceiver extends BroadcastReceiver {
 
     protected Set<NetworkStateReceiverListener> listeners;
